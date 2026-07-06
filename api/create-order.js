@@ -1,6 +1,6 @@
 const FULL_AMOUNT_PAISE = 29900;
-const TEST_COUPON = 'SSC';
-const TEST_COUPON_DISCOUNT_PAISE = 28900;
+const TEST_COUPON = 'NISHANT';
+const TEST_COUPON_DISCOUNT_PAISE = 29800;
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {

@@ -1108,8 +1108,8 @@ try{
 // This is the PUBLIC key id — safe to expose in front-end code. Never put your Key Secret here.
 var RAZORPAY_KEY_ID = 'rzp_live_TABtLn6YJBosEB';
 var FULL_INSPECTION_AMOUNT_INR = 299;
-var TEST_COUPON_CODE = 'SSC';
-var TEST_COUPON_DISCOUNT_INR = 289;
+var TEST_COUPON_CODE = 'NISHANT';
+var TEST_COUPON_DISCOUNT_INR = 298;
 var WEB3FORMS_ACCESS_KEY = '496520dd-3cf4-483a-8b74-7d3a2898bdc3'; // same key already used by the lead form
 
 var pcPendingBtn = null;
@@ -1140,8 +1140,8 @@ document.addEventListener('click', function(e){
 document.addEventListener('input', function(e){
   if(e.target && e.target.id === 'pcCoupon'){
     var pricing = getCheckoutPricing(e.target.value);
-    document.getElementById('pcAmountLabel').textContent = pricing.coupon ? 'Rs. 10 (SSC coupon applied)' : 'Rs. 299';
-    document.getElementById('pcSubmitBtn').textContent = pricing.coupon ? 'Pay Rs. 10 & Book Inspection' : 'Proceed to Payment';
+    document.getElementById('pcAmountLabel').textContent = pricing.coupon ? 'Rs. 1 (NISHANT coupon applied)' : 'Rs. 299';
+    document.getElementById('pcSubmitBtn').textContent = pricing.coupon ? 'Pay Rs. 1 & Book Inspection' : 'Proceed to Payment';
   }
 });
 
