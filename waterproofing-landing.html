@@ -434,6 +434,12 @@ body.lang-en .hi-content{display:none!important;}body.lang-gu .hi-content{displa
               onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='#E2DED8'">
           </div>
         </div>
+        <div style="margin-bottom:16px;">
+          <label style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:6px;">Email</label>
+          <input type="email" name="email" required placeholder="you@example.com"
+            style="width:100%;padding:13px 16px;border:1.5px solid #E2DED8;border-radius:10px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--charcoal);outline:none;transition:border-color .2s;"
+            onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='#E2DED8'">
+        </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
           <div>
             <label style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:6px;">Problem Type</label>
@@ -499,8 +505,13 @@ function submitLead(e){
   var f=e.target;
   var name=f.name.value.trim();
   var phone=f.phone.value.trim();
+  var email=f.email.value.trim();
   var problem=f.problem.value;
   var area=f.area.value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    alert('Please enter a valid email address.');
+    return;
+  }
   var btn=document.getElementById('leadSubmitBtn');
   btn.textContent='Sending...';
   btn.disabled=true;
@@ -517,7 +528,7 @@ function submitLead(e){
   fetch('/api/capi?type=lead',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,phone:phone,problem:problem,area:area,event_id:eventId})
+    body:JSON.stringify({name:name,phone:phone,email:email,problem:problem,area:area,event_id:eventId})
   }).catch(function(){});
 
   // send email notification via FormSubmit
@@ -531,6 +542,7 @@ function submitLead(e){
       from_name:'SSC Website',
       Name:name,
       Phone:phone,
+      Email:email,
       'Problem Type':problem,
       'Area in Surat':area
     })
@@ -1270,6 +1282,20 @@ async function openRazorpayCheckout(details, triggerBtn){
         })
       }).catch(function(){});
 
+      fetch('/api/send-confirmation-email', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          name: details.name,
+          phone: details.phone,
+          email: details.email,
+          payment_id: paymentId,
+          amount: details.amountInr,
+          coupon: details.coupon || '',
+          discount: details.discountInr || 0
+        })
+      }).catch(function(){});
+
       // fire browser-side Purchase pixel event; eventID matches the payment id
       // so it de-duplicates against the server-side CAPI Purchase event that
       // the Razorpay webhook (/api/capi?type=purchase) will send once it's live.
@@ -1310,7 +1336,7 @@ async function openRazorpayCheckout(details, triggerBtn){
 .wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(37,211,102,.55);}
 .wa-float svg{width:30px;height:30px;fill:#fff;}
 </style>
-<a href="https://wa.me/917359359310?text=Hi%2C%20I%20have%20a%20waterproofing%20problem%20in%20Surat.%20I%20want%20to%20know%20more." class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<a href="https://wa.me/919924442799?text=Hi%2C%20I%20have%20a%20waterproofing%20problem%20in%20Surat.%20I%20want%20to%20know%20more." class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.003 2C8.274 2 2 8.274 2 16.003c0 2.473.664 4.876 1.923 6.988L2 30l7.242-1.897A13.94 13.94 0 0 0 16.003 30C23.73 30 30 23.726 30 16.003 30 8.274 23.73 2 16.003 2zm0 25.538a11.5 11.5 0 0 1-5.876-1.613l-.42-.25-4.3 1.127 1.148-4.19-.274-.43A11.493 11.493 0 0 1 4.463 16c0-6.36 5.18-11.537 11.54-11.537S27.537 9.64 27.537 16c0 6.358-5.178 11.538-11.534 11.538zm6.33-8.636c-.347-.174-2.055-1.014-2.374-1.13-.318-.115-.55-.174-.78.174-.232.347-.896 1.13-1.1 1.362-.202.23-.405.26-.752.087-.347-.174-1.465-.54-2.79-1.72-1.03-.92-1.726-2.055-1.928-2.403-.202-.347-.022-.535.152-.707.156-.155.347-.405.52-.607.174-.203.232-.347.347-.578.116-.232.058-.434-.03-.608-.086-.173-.78-1.882-1.07-2.577-.28-.676-.567-.585-.78-.595l-.664-.012c-.232 0-.607.087-.924.434-.318.347-1.214 1.187-1.214 2.895s1.243 3.356 1.416 3.588c.174.23 2.447 3.734 5.929 5.235.829.358 1.475.572 1.98.732.832.264 1.59.227 2.188.138.667-.1 2.055-.84 2.345-1.652.29-.81.29-1.504.202-1.65-.086-.144-.317-.23-.664-.405z"/></svg>
 </a>
 </body>

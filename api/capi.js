@@ -30,12 +30,14 @@ module.exports = async function handler(req, res) {
 
 async function handleLead(body, res) {
   const phone = normalizeIndiaPhone(body.phone);
+  const email = String(body.email || '').trim().toLowerCase();
   const nameParts = String(body.name || '').trim().toLowerCase().split(/\s+/, 2);
 
   const userData = {
     country: [hash('in')]
   };
   if (phone) userData.ph = [hash(phone)];
+  if (email) userData.em = [hash(email)];
   if (nameParts[0]) userData.fn = [hash(nameParts[0])];
   if (nameParts[1]) userData.ln = [hash(nameParts[1])];
 
