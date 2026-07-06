@@ -1088,8 +1088,10 @@ try{
       <input type="tel" id="pcPhone" name="pcPhone" required placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number" autocomplete="tel">
       <label for="pcEmail">Email (for your payment receipt)</label>
       <input type="email" id="pcEmail" name="pcEmail" required placeholder="you@example.com" autocomplete="email">
+      <label for="pcCoupon">Coupon Code (optional)</label>
+      <input type="text" id="pcCoupon" name="pcCoupon" placeholder="Enter coupon code" autocomplete="off">
       <div class="rzp-modal-error" id="pcError">Please enter a valid name, 10-digit mobile number, and email.</div>
-      <div class="rzp-modal-amount"><span>Inspection Fee</span><span>Rs. 299</span></div>
+      <div class="rzp-modal-amount"><span>Inspection Fee</span><span id="pcAmountLabel">Rs. 299</span></div>
       <button type="submit" class="btn btn-pay btn-full" id="pcSubmitBtn">Proceed to Payment</button>
     </form>
   </div>
@@ -1119,6 +1121,13 @@ function closePreCheckoutModal(){
 document.addEventListener('click', function(e){
   if(e.target && e.target.id === 'preCheckoutOverlay') closePreCheckoutModal();
 });
+document.addEventListener('input', function(e){
+  if(e.target && e.target.id === 'pcCoupon'){
+    var isTestCoupon = e.target.value.trim().toUpperCase() === 'NISHANT';
+    document.getElementById('pcAmountLabel').textContent = isTestCoupon ? 'Rs. 0' : 'Rs. 299';
+    document.getElementById('pcSubmitBtn').textContent = isTestCoupon ? 'Book Free Test Inspection' : 'Proceed to Payment';
+  }
+});
 
 function submitPreCheckout(e){
   e.preventDefault();
@@ -1126,6 +1135,7 @@ function submitPreCheckout(e){
   var name = f.pcName.value.trim();
   var phone = f.pcPhone.value.trim();
   var email = f.pcEmail.value.trim();
+  var coupon = f.pcCoupon.value.trim().toUpperCase();
 
   var phoneOk = /^[6-9][0-9]{9}$/.test(phone);
   var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -1136,7 +1146,54 @@ function submitPreCheckout(e){
   }
 
   closePreCheckoutModal();
-  openRazorpayCheckout({ name: name, phone: phone, email: email }, pcPendingBtn);
+  if(coupon === 'NISHANT'){
+    completeCouponBooking({ name: name, phone: phone, email: email, coupon: coupon }, pcPendingBtn);
+  }else{
+    openRazorpayCheckout({ name: name, phone: phone, email: email }, pcPendingBtn);
+  }
+}
+
+function completeCouponBooking(details, triggerBtn){
+  if(triggerBtn){
+    triggerBtn.dataset.originalHtml = triggerBtn.dataset.originalHtml || triggerBtn.innerHTML;
+    triggerBtn.style.opacity = '0.75';
+    triggerBtn.style.pointerEvents = 'none';
+  }
+
+  var paymentId = 'coupon_NISHANT_' + Date.now();
+  var booking = {
+    name: details.name,
+    phone: details.phone,
+    email: details.email,
+    payment_id: paymentId,
+    amount: 0,
+    coupon: details.coupon,
+    timestamp: new Date().toISOString()
+  };
+  try{ sessionStorage.setItem('ssc_booking', JSON.stringify(booking)); }catch(err){}
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify({
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: 'Test Booking — Coupon NISHANT — ' + details.name,
+      from_name: 'SSC Website — Coupon Test Booking',
+      Name: details.name,
+      Phone: details.phone,
+      Email: details.email,
+      'Coupon Code': details.coupon,
+      'Payment ID': paymentId,
+      'Amount Paid': 'Rs. 0',
+      Service: 'Waterproofing Expert Inspection'
+    })
+  }).catch(function(){});
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'coupon_booking', { coupon: details.coupon, value: 0, currency: 'INR' });
+  }
+
+  window.location.href = 'booking-confirmed.html?payment_id=' + encodeURIComponent(paymentId) + '&amount=0&coupon=' + encodeURIComponent(details.coupon);
 }
 
 // STEP 2 — open Razorpay, prefilled with the details we just captured.

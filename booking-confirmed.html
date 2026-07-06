@@ -87,9 +87,10 @@
 
 <script>
 (function(){
-  var params = new URLSearchParams(window.location.search);
-  var paymentId = params.get('payment_id');
-  var amount = params.get('amount');
+	  var params = new URLSearchParams(window.location.search);
+	  var paymentId = params.get('payment_id');
+	  var amount = params.get('amount');
+	  var coupon = params.get('coupon');
 
   var booking = null;
   try{
@@ -101,19 +102,28 @@
   // payment, same tab). The URL only ever carries the payment id and amount —
   // never name/phone/email — so this page's link can be safely shared or
   // logged without exposing anyone's personal details.
-  if (booking && paymentId && booking.payment_id === paymentId) {
-    document.getElementById('confirmSub').textContent = 'Thank you, ' + booking.name + '. Your payment has been received and your engineer site visit is now confirmed. Our team will call you on ' + booking.phone + ' within 2 business hours to schedule a convenient time.';
-    document.getElementById('custName').textContent = booking.name;
-    document.getElementById('custPhone').textContent = booking.phone;
-    document.getElementById('paymentRef').textContent = booking.payment_id;
-    document.getElementById('amountPaid').textContent = 'Rs. ' + booking.amount;
-  } else if (paymentId) {
-    // payment id present in the URL but no matching session data (e.g. different
-    // browser/tab, or session cleared) — still confirm the payment, just without personalization.
-    document.getElementById('custName').textContent = 'Not available in this session';
-    document.getElementById('custPhone').textContent = 'Not available in this session';
-    document.getElementById('paymentRef').textContent = paymentId;
-    if (amount) document.getElementById('amountPaid').textContent = 'Rs. ' + amount;
+	  if (booking && paymentId && booking.payment_id === paymentId) {
+	    if (Number(booking.amount) === 0 && booking.coupon) {
+	      document.querySelector('.confirm-title').textContent = 'Coupon Applied — Your Test Inspection is Booked';
+	      document.getElementById('confirmSub').textContent = 'Thank you, ' + booking.name + '. Coupon ' + booking.coupon + ' has been applied for this test booking. Our team will call you on ' + booking.phone + ' within 2 business hours to schedule a convenient time.';
+	    } else {
+	      document.getElementById('confirmSub').textContent = 'Thank you, ' + booking.name + '. Your payment has been received and your engineer site visit is now confirmed. Our team will call you on ' + booking.phone + ' within 2 business hours to schedule a convenient time.';
+	    }
+	    document.getElementById('custName').textContent = booking.name;
+	    document.getElementById('custPhone').textContent = booking.phone;
+	    document.getElementById('paymentRef').textContent = booking.payment_id;
+	    document.getElementById('amountPaid').textContent = Number(booking.amount) === 0 && booking.coupon ? 'Rs. 0 (' + booking.coupon + ' coupon)' : 'Rs. ' + booking.amount;
+	  } else if (paymentId) {
+	    // payment id present in the URL but no matching session data (e.g. different
+	    // browser/tab, or session cleared) — still confirm the payment, just without personalization.
+	    if (amount === '0' && coupon) {
+	      document.querySelector('.confirm-title').textContent = 'Coupon Applied — Test Booking Reference Created';
+	      document.getElementById('confirmSub').textContent = 'Coupon ' + coupon + ' was applied for this test booking. If you need scheduling confirmation, please call us so we can verify the booking manually.';
+	    }
+	    document.getElementById('custName').textContent = 'Not available in this session';
+	    document.getElementById('custPhone').textContent = 'Not available in this session';
+	    document.getElementById('paymentRef').textContent = paymentId;
+	    if (amount) document.getElementById('amountPaid').textContent = amount === '0' && coupon ? 'Rs. 0 (' + coupon + ' coupon)' : 'Rs. ' + amount;
   } else {
     // No payment_id present — someone landed here directly. Keep the message generic
     // and steer them back rather than implying a payment took place.
