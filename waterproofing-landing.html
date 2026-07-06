@@ -1107,10 +1107,22 @@ try{
 // TODO: replace with your live Razorpay Key ID (Dashboard > Settings > API Keys).
 // This is the PUBLIC key id — safe to expose in front-end code. Never put your Key Secret here.
 var RAZORPAY_KEY_ID = 'rzp_live_TABtLn6YJBosEB';
-var RAZORPAY_AMOUNT_PAISE = 29900; // Rs. 299.00
+var FULL_INSPECTION_AMOUNT_INR = 299;
+var TEST_COUPON_CODE = 'SSC';
+var TEST_COUPON_DISCOUNT_INR = 289;
 var WEB3FORMS_ACCESS_KEY = '496520dd-3cf4-483a-8b74-7d3a2898bdc3'; // same key already used by the lead form
 
 var pcPendingBtn = null;
+
+function getCheckoutPricing(coupon){
+  var normalizedCoupon = (coupon || '').trim().toUpperCase();
+  var discount = normalizedCoupon === TEST_COUPON_CODE ? TEST_COUPON_DISCOUNT_INR : 0;
+  return {
+    coupon: discount ? TEST_COUPON_CODE : '',
+    discount: discount,
+    amount: FULL_INSPECTION_AMOUNT_INR - discount
+  };
+}
 
 // STEP 1 — capture who is paying, before Razorpay ever opens.
 function openPreCheckoutModal(triggerBtn){
@@ -1127,9 +1139,9 @@ document.addEventListener('click', function(e){
 });
 document.addEventListener('input', function(e){
   if(e.target && e.target.id === 'pcCoupon'){
-    var isTestCoupon = e.target.value.trim().toUpperCase() === 'NISHANT';
-    document.getElementById('pcAmountLabel').textContent = isTestCoupon ? 'Rs. 0' : 'Rs. 299';
-    document.getElementById('pcSubmitBtn').textContent = isTestCoupon ? 'Book Free Test Inspection' : 'Proceed to Payment';
+    var pricing = getCheckoutPricing(e.target.value);
+    document.getElementById('pcAmountLabel').textContent = pricing.coupon ? 'Rs. 10 (SSC coupon applied)' : 'Rs. 299';
+    document.getElementById('pcSubmitBtn').textContent = pricing.coupon ? 'Pay Rs. 10 & Book Inspection' : 'Proceed to Payment';
   }
 });
 
@@ -1150,54 +1162,15 @@ function submitPreCheckout(e){
   }
 
   closePreCheckoutModal();
-  if(coupon === 'NISHANT'){
-    completeCouponBooking({ name: name, phone: phone, email: email, coupon: coupon }, pcPendingBtn);
-  }else{
-    openRazorpayCheckout({ name: name, phone: phone, email: email }, pcPendingBtn);
-  }
-}
-
-function completeCouponBooking(details, triggerBtn){
-  if(triggerBtn){
-    triggerBtn.dataset.originalHtml = triggerBtn.dataset.originalHtml || triggerBtn.innerHTML;
-    triggerBtn.style.opacity = '0.75';
-    triggerBtn.style.pointerEvents = 'none';
-  }
-
-  var paymentId = 'coupon_NISHANT_' + Date.now();
-  var booking = {
-    name: details.name,
-    phone: details.phone,
-    email: details.email,
-    payment_id: paymentId,
-    amount: 0,
-    coupon: details.coupon,
-    timestamp: new Date().toISOString()
-  };
-  try{ sessionStorage.setItem('ssc_booking', JSON.stringify(booking)); }catch(err){}
-
-  fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({
-      access_key: WEB3FORMS_ACCESS_KEY,
-      subject: 'Test Booking — Coupon NISHANT — ' + details.name,
-      from_name: 'SSC Website — Coupon Test Booking',
-      Name: details.name,
-      Phone: details.phone,
-      Email: details.email,
-      'Coupon Code': details.coupon,
-      'Payment ID': paymentId,
-      'Amount Paid': 'Rs. 0',
-      Service: 'Waterproofing Expert Inspection'
-    })
-  }).catch(function(){});
-
-  if (typeof gtag === 'function') {
-    gtag('event', 'coupon_booking', { coupon: details.coupon, value: 0, currency: 'INR' });
-  }
-
-  window.location.href = 'booking-confirmed.html?payment_id=' + encodeURIComponent(paymentId) + '&amount=0&coupon=' + encodeURIComponent(details.coupon);
+  var pricing = getCheckoutPricing(coupon);
+  openRazorpayCheckout({
+    name: name,
+    phone: phone,
+    email: email,
+    coupon: pricing.coupon,
+    amountInr: pricing.amount,
+    discountInr: pricing.discount
+  }, pcPendingBtn);
 }
 
 // STEP 2 — open Razorpay, prefilled with the details we just captured.
@@ -1216,11 +1189,15 @@ async function openRazorpayCheckout(details, triggerBtn){
       body: JSON.stringify({
         name: details.name,
         phone: details.phone,
-        email: details.email
+        email: details.email,
+        coupon: details.coupon || ''
       })
     });
     order = await orderResponse.json();
     if (!orderResponse.ok || !order.id) throw new Error(order.error || 'Unable to create payment order');
+    details.amountInr = Math.round(Number(order.amount || 0) / 100);
+    details.coupon = order.coupon || '';
+    details.discountInr = Number(order.discount || 0);
   } catch (err) {
     alert('Payment could not be started. Please try again, or call us directly on +91 73593 59310.');
     if(triggerBtn){
@@ -1232,7 +1209,7 @@ async function openRazorpayCheckout(details, triggerBtn){
 
   var options = {
     key: RAZORPAY_KEY_ID,
-    amount: RAZORPAY_AMOUNT_PAISE,
+    amount: order.amount,
     currency: 'INR',
     order_id: order.id,
     name: 'Siddh Sai Corporation',
@@ -1247,7 +1224,9 @@ async function openRazorpayCheckout(details, triggerBtn){
       service: 'Waterproofing Expert Inspection',
       source_page: 'waterproofing-landing',
       customer_name: details.name,
-      customer_phone: details.phone
+      customer_phone: details.phone,
+      coupon_code: details.coupon || 'none',
+      discount_inr: details.discountInr || 0
     },
     theme: { color: '#0F2240' },
     handler: function (response){
@@ -1262,7 +1241,9 @@ async function openRazorpayCheckout(details, triggerBtn){
         phone: details.phone,
         email: details.email,
         payment_id: paymentId,
-        amount: 299,
+        amount: details.amountInr,
+        coupon: details.coupon || '',
+        discount: details.discountInr || 0,
         timestamp: new Date().toISOString()
       };
       try{ sessionStorage.setItem('ssc_booking', JSON.stringify(booking)); }catch(err){}
@@ -1276,13 +1257,15 @@ async function openRazorpayCheckout(details, triggerBtn){
         headers: {'Content-Type':'application/json','Accept':'application/json'},
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
-          subject: 'Payment Received — Rs. 299 — ' + details.name,
+          subject: 'Payment Received — Rs. ' + details.amountInr + ' — ' + details.name,
           from_name: 'SSC Website — Payment Notification',
           Name: details.name,
           Phone: details.phone,
           Email: details.email,
+          'Coupon Code': details.coupon || 'None',
+          'Discount': details.discountInr ? 'Rs. ' + details.discountInr : 'None',
           'Payment ID': paymentId,
-          'Amount Paid': 'Rs. 299',
+          'Amount Paid': 'Rs. ' + details.amountInr,
           Service: 'Waterproofing Expert Inspection'
         })
       }).catch(function(){});
@@ -1291,14 +1274,14 @@ async function openRazorpayCheckout(details, triggerBtn){
       // so it de-duplicates against the server-side CAPI Purchase event that
       // the Razorpay webhook (/api/capi?type=purchase) will send once it's live.
       if (typeof fbq === 'function') {
-        fbq('track', 'Purchase', { value: 299, currency: 'INR', content_name: 'Waterproofing Expert Inspection' }, { eventID: paymentId });
+        fbq('track', 'Purchase', { value: details.amountInr, currency: 'INR', content_name: 'Waterproofing Expert Inspection' }, { eventID: paymentId });
       }
       if (typeof gtag === 'function') {
-        gtag('event', 'purchase', { transaction_id: paymentId, value: 299, currency: 'INR' });
+        gtag('event', 'purchase', { transaction_id: paymentId, value: details.amountInr, currency: 'INR', coupon: details.coupon || undefined });
       }
 
       // only non-sensitive identifiers go in the URL
-      window.location.href = 'booking-confirmed.html?payment_id=' + encodeURIComponent(paymentId) + '&amount=299';
+      window.location.href = 'booking-confirmed.html?payment_id=' + encodeURIComponent(paymentId) + '&amount=' + encodeURIComponent(details.amountInr) + (details.coupon ? '&coupon=' + encodeURIComponent(details.coupon) : '');
     },
     modal: {
       ondismiss: function(){

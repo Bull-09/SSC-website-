@@ -1,4 +1,6 @@
-const RAZORPAY_AMOUNT_PAISE = 29900;
+const FULL_AMOUNT_PAISE = 29900;
+const TEST_COUPON = 'SSC';
+const TEST_COUPON_DISCOUNT_PAISE = 28900;
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -23,6 +25,7 @@ module.exports = async function handler(req, res) {
   const phone = String(body.phone || '').replace(/\D/g, '');
   const name = String(body.name || '').trim();
   const email = String(body.email || '').trim().toLowerCase();
+  const coupon = String(body.coupon || '').trim().toUpperCase();
 
   if (!name || !/^[6-9][0-9]{9}$/.test(phone) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Invalid customer details' });
@@ -30,6 +33,8 @@ module.exports = async function handler(req, res) {
 
   const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
   const receipt = `ssc_${Date.now()}`;
+  const discountPaise = coupon === TEST_COUPON ? TEST_COUPON_DISCOUNT_PAISE : 0;
+  const amountPaise = FULL_AMOUNT_PAISE - discountPaise;
 
   const response = await fetch('https://api.razorpay.com/v1/orders', {
     method: 'POST',
@@ -38,7 +43,7 @@ module.exports = async function handler(req, res) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      amount: RAZORPAY_AMOUNT_PAISE,
+      amount: amountPaise,
       currency: 'INR',
       receipt,
       notes: {
@@ -46,6 +51,8 @@ module.exports = async function handler(req, res) {
         customer_name: name,
         customer_phone: phone,
         customer_email: email,
+        coupon_code: coupon || 'none',
+        discount_inr: String(discountPaise / 100),
         source_page: 'waterproofing-landing'
       }
     })
@@ -63,6 +70,8 @@ module.exports = async function handler(req, res) {
     id: data.id,
     amount: data.amount,
     currency: data.currency,
-    receipt: data.receipt
+    receipt: data.receipt,
+    coupon: coupon === TEST_COUPON ? TEST_COUPON : '',
+    discount: discountPaise / 100
   });
 };
