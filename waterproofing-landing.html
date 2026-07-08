@@ -19,6 +19,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-R5M880EP05');
+  gtag('config', 'AW-18296459666');
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,16 +29,28 @@
 <!-- Event snippet for Submit lead form conversion page
 In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
 <script>
-function gtag_report_conversion(url) {
+function gtag_report_conversion(url, leadData) {
   var callback = function () {
     if (typeof(url) != 'undefined') {
       window.location = url;
     }
   };
+  if (leadData && typeof gtag === 'function') {
+    gtag('set', 'user_data', {
+      email: leadData.email,
+      phone_number: '+91' + leadData.phone,
+      address: {
+        first_name: leadData.firstName,
+        last_name: leadData.lastName,
+        country: 'IN'
+      }
+    });
+  }
   gtag('event', 'conversion', {
       'send_to': 'AW-18296459666/7DqMCLafkMocEJKjt5RE',
       'value': 1.0,
       'currency': 'INR',
+      'event_id': leadData && leadData.eventId ? leadData.eventId : undefined,
       'event_callback': callback
   });
   return false;
@@ -500,6 +513,35 @@ body.lang-en .hi-content{display:none!important;}body.lang-gu .hi-content{displa
 }
 </style>
 <script>
+function getLeadTrackingParams(){
+  var params = new URLSearchParams(window.location.search);
+  var keys = ['gclid','gbraid','wbraid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+  var data = {};
+  keys.forEach(function(key){
+    var value = params.get(key);
+    if(value){
+      data[key] = value;
+      try{ sessionStorage.setItem('ssc_' + key, value); }catch(err){}
+    }else{
+      try{
+        var stored = sessionStorage.getItem('ssc_' + key);
+        if(stored) data[key] = stored;
+      }catch(err){}
+    }
+  });
+  data.page_url = window.location.href;
+  data.landing_page = window.location.pathname;
+  return data;
+}
+
+function splitLeadName(name){
+  var parts = String(name || '').trim().split(/\s+/);
+  return {
+    firstName: parts[0] || '',
+    lastName: parts.slice(1).join(' ')
+  };
+}
+
 function submitLead(e){
   e.preventDefault();
   var f=e.target;
@@ -518,6 +560,8 @@ function submitLead(e){
 
   // unique event_id for browser+server deduplication
   var eventId='lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+  var trackingParams=getLeadTrackingParams();
+  var nameParts=splitLeadName(name);
 
   // fire browser-side Lead pixel event
   if(typeof fbq==='function'){
@@ -528,7 +572,7 @@ function submitLead(e){
   fetch('/api/capi?type=lead',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,phone:phone,email:email,problem:problem,area:area,event_id:eventId})
+    body:JSON.stringify({name:name,phone:phone,email:email,problem:problem,area:area,event_id:eventId,tracking:trackingParams})
   }).catch(function(){});
 
   // send email notification via FormSubmit
@@ -544,14 +588,53 @@ function submitLead(e){
       Phone:phone,
       Email:email,
       'Problem Type':problem,
-      'Area in Surat':area
+      'Area in Surat':area,
+      'Google Click ID':trackingParams.gclid || '',
+      'Google GBRAID':trackingParams.gbraid || '',
+      'Google WBRAID':trackingParams.wbraid || '',
+      'UTM Source':trackingParams.utm_source || '',
+      'UTM Medium':trackingParams.utm_medium || '',
+      'UTM Campaign':trackingParams.utm_campaign || '',
+      'UTM Term':trackingParams.utm_term || '',
+      'UTM Content':trackingParams.utm_content || '',
+      'Landing Page':trackingParams.page_url,
+      'Event ID':eventId
     })
   }).then(function(r){return r.json();}).then(function(d){
     document.getElementById('leadThankYou').style.display='block';
     f.reset();
     btn.style.display='none';
-    if(typeof gtag==='function') gtag('event','form_submit',{event_category:'conversion',event_label:'waterproofing_lead'});
-    if(typeof gtag_report_conversion==='function') gtag_report_conversion();
+    if(typeof gtag==='function') {
+      gtag('event','generate_lead',{
+        event_category:'conversion',
+        event_label:'waterproofing_lead',
+        form_id:'leadForm',
+        method:'callback_form',
+        value:1,
+        currency:'INR',
+        event_id:eventId,
+        lead_problem:problem,
+        lead_area:area,
+        gclid:trackingParams.gclid || undefined,
+        gbraid:trackingParams.gbraid || undefined,
+        wbraid:trackingParams.wbraid || undefined
+      });
+      gtag('event','form_submit',{
+        event_category:'conversion',
+        event_label:'waterproofing_lead',
+        form_id:'leadForm',
+        event_id:eventId
+      });
+    }
+    if(typeof gtag_report_conversion==='function') {
+      gtag_report_conversion(undefined, {
+        email:email,
+        phone:phone,
+        firstName:nameParts.firstName,
+        lastName:nameParts.lastName,
+        eventId:eventId
+      });
+    }
   }).catch(function(){
     btn.textContent='Request a Callback';
     btn.disabled=false;

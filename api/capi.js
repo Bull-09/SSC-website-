@@ -32,6 +32,7 @@ async function handleLead(body, res) {
   const phone = normalizeIndiaPhone(body.phone);
   const email = String(body.email || '').trim().toLowerCase();
   const nameParts = String(body.name || '').trim().toLowerCase().split(/\s+/, 2);
+  const tracking = body.tracking && typeof body.tracking === 'object' ? body.tracking : {};
 
   const userData = {
     country: [hash('in')]
@@ -49,7 +50,13 @@ async function handleLead(body, res) {
     user_data: userData,
     custom_data: {
       lead_type: body.problem || '',
-      area: body.area || ''
+      area: body.area || '',
+      gclid: tracking.gclid || '',
+      gbraid: tracking.gbraid || '',
+      wbraid: tracking.wbraid || '',
+      utm_source: tracking.utm_source || '',
+      utm_medium: tracking.utm_medium || '',
+      utm_campaign: tracking.utm_campaign || ''
     }
   };
 
