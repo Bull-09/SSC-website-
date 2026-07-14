@@ -46,7 +46,7 @@ async function handleLead(body, res) {
     event_name: 'Lead',
     event_time: Math.floor(Date.now() / 1000),
     action_source: 'website',
-    event_source_url: 'https://siddhsaicorporation.in/waterproofing-landing.html',
+    event_source_url: 'https://siddhsaicorporation.in/waterproofing-landing-399.html',
     user_data: userData,
     custom_data: {
       lead_type: body.problem || '',
@@ -99,19 +99,19 @@ async function handlePurchase(req, rawBody, body, res) {
   if (phone) userData.ph = [hash(phone)];
   if (email) userData.em = [hash(email)];
 
-  const amountInr = payment.amount ? payment.amount / 100 : 299;
+  const amountInr = payment.amount ? payment.amount / 100 : 399;
   const event = {
     event_name: 'Purchase',
     event_time: Math.floor(Date.now() / 1000),
     action_source: 'website',
-    event_source_url: 'https://siddhsaicorporation.in/waterproofing-landing.html',
+    event_source_url: 'https://siddhsaicorporation.in/waterproofing-landing-399.html',
     event_id: payment.id || `pay_${Date.now()}`,
     user_data: userData,
     custom_data: {
       currency: 'INR',
       value: Number(amountInr),
       content_name: 'Waterproofing Expert Inspection',
-      content_ids: ['waterproofing-inspection-299']
+      content_ids: ['waterproofing-inspection-399']
     }
   };
 
