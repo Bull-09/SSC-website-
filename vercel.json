@@ -11,6 +11,14 @@
       "destination": "/waterproofing-landing.html"
     },
     {
+      "source": "/waterproofing-landing-399",
+      "destination": "/waterproofing-landing-399.html"
+    },
+    {
+      "source": "/waterproofing-399",
+      "destination": "/waterproofing-landing-399.html"
+    },
+    {
       "source": "/booking-confirmed",
       "destination": "/booking-confirmed.html"
     }
