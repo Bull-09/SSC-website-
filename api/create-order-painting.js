@@ -24,12 +24,14 @@ module.exports = async function handler(req, res) {
 
   const name = String(body.name || '').trim();
   const phone = String(body.phone || '').replace(/\D/g, '');
+  const whatsapp = String(body.whatsapp || '').replace(/\D/g, '');
   const propertyType = String(body.property_type || '').trim();
   const area = String(body.area || '').trim();
   const requirement = String(body.requirement || '').trim();
   const size = String(body.size || '').trim();
   const timeline = String(body.timeline || '').trim();
   const coupon = String(body.coupon || '').trim().toUpperCase();
+  const quickPayment = Boolean(body.quick_payment);
 
   if (!name || !/^[6-9][0-9]{9}$/.test(phone) || !propertyType || !area || !requirement) {
     return res.status(400).json({ error: 'Please enter valid painting visit details' });
@@ -55,6 +57,7 @@ module.exports = async function handler(req, res) {
         service: 'Painting Visit',
         customer_name: name,
         customer_phone: phone,
+        customer_whatsapp: whatsapp || phone,
         property_type: propertyType,
         area,
         requirement,
@@ -62,7 +65,7 @@ module.exports = async function handler(req, res) {
         timeline: timeline || 'not specified',
         coupon_code: couponApplied ? TEST_COUPON : 'none',
         discount_inr: String(discountPaise / 100),
-        source_page: 'painting-landing'
+        source_page: quickPayment ? 'painting-landing-quick-payment' : 'painting-landing'
       }
     })
   });

@@ -136,17 +136,6 @@ button,input,select,textarea{font:inherit}
 .comparison-labels{position:absolute;inset:auto 16px 16px 16px;display:flex;justify-content:space-between}
 .comparison-labels span{background:rgba(8,23,45,.82);color:#fff;border-radius:var(--pill);padding:8px 12px;font:800 12px Manrope,sans-serif}
 .proof-note{background:var(--white);border:1px dashed rgba(15,34,64,.24);border-radius:20px;padding:22px;color:var(--muted);line-height:1.7}
-.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.project{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:24px}
-.project .status{display:inline-flex;border-radius:var(--pill);background:rgba(212,168,71,.18);color:var(--gold-deep);padding:7px 11px;font:800 11px Manrope,sans-serif;text-transform:uppercase;letter-spacing:.7px;margin-bottom:18px}
-.project h3{font-family:Fraunces,serif;color:var(--navy);font-size:24px;margin-bottom:10px}
-.project p{font-size:14px;line-height:1.7;color:var(--muted)}
-.area-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.area-card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow-soft)}
-.area-card .area{font:900 13px Manrope,sans-serif;letter-spacing:1px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:12px}
-.area-card p{font-size:14px;line-height:1.7;color:var(--muted)}
-.area-card strong{display:block;color:var(--navy);font-family:Fraunces,serif;font-size:20px;line-height:1.18;margin-bottom:8px}
-.ethical-note{border-left:4px solid var(--gold);background:rgba(212,168,71,.12);border-radius:14px;padding:16px 18px;color:#514328;line-height:1.65;margin-top:24px}
 .process{background:var(--white)}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .step{background:var(--cream);border-radius:20px;padding:22px;border:1px solid var(--line)}
@@ -174,6 +163,17 @@ textarea{min-height:106px;resize:vertical}
 .form-status{display:none;border-radius:14px;padding:14px;margin:14px 0;font-weight:700;line-height:1.5}
 .form-status.success{display:block;background:#e9f8ef;color:#17663a}
 .form-status.error{display:block;background:#fff0ed;color:#9b2f1f}
+.quick-modal[hidden]{display:none}
+.quick-modal{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:22px;background:rgba(8,23,45,.68);backdrop-filter:blur(8px)}
+.quick-card{width:min(480px,100%);background:#fff;color:var(--navy);border-radius:26px;padding:28px;box-shadow:0 34px 90px rgba(0,0,0,.28);position:relative;border-top:7px solid var(--gold)}
+.quick-close{position:absolute;right:16px;top:14px;width:38px;height:38px;border:0;border-radius:50%;background:var(--cream);color:var(--navy);font-size:24px;line-height:1;cursor:pointer}
+.quick-card h2{font-family:Fraunces,serif;font-size:32px;line-height:1.08;color:var(--navy);margin:6px 44px 10px 0}
+.quick-card p{color:var(--muted);line-height:1.7;margin-bottom:18px}
+.quick-price{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--cream);border-radius:16px;padding:14px 16px;margin:10px 0 18px;font:800 14px Manrope,sans-serif}
+.quick-price strong{font-family:Fraunces,serif;font-size:30px;color:var(--gold-deep)}
+.quick-form{display:grid;gap:13px}
+.quick-form .btn{width:100%;margin-top:4px}
+.quick-note{font-size:12px!important;color:var(--muted)!important;margin:8px 0 0!important}
 .final-cta{text-align:center;background:var(--cream)}
 .final-cta h2{font-family:Fraunces,serif;font-size:clamp(34px,5vw,58px);line-height:1.05;color:var(--navy);max-width:760px;margin:0 auto 18px}
 .final-cta p{color:var(--muted);font-size:17px;line-height:1.8;max-width:640px;margin:0 auto 28px}
@@ -192,10 +192,10 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
   body.reveal-ready [data-reveal].visible{opacity:1;transform:none}
 }
 @media(max-width:980px){
-  .nav-links{display:none}.mobile-menu{display:inline-flex}.hero-inner,.offer-grid,.compare-wrap,.form-grid{grid-template-columns:1fr}.hero-inner{min-height:auto;padding:54px 0}.offer-card{max-width:640px}.trust-grid{grid-template-columns:repeat(2,1fr)}.cards,.feature-grid,.service-grid,.projects-grid,.area-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.sticky-bar{display:flex}.wa-float{bottom:86px}.lang-switch{display:none}
+  .nav-links{display:none}.mobile-menu{display:inline-flex}.hero-inner,.offer-grid,.compare-wrap,.form-grid{grid-template-columns:1fr}.hero-inner{min-height:auto;padding:54px 0}.offer-card{max-width:640px}.trust-grid{grid-template-columns:repeat(2,1fr)}.cards,.feature-grid,.service-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.sticky-bar{display:flex}.wa-float{bottom:86px}.lang-switch{display:none}
 }
 @media(max-width:620px){
-  .container{width:min(100% - 28px,1160px)}.section{padding:62px 0}.hero h1{font-size:50px}.hero-sub{font-size:18px}.hero-ctas .btn,.nav-actions .btn-primary{width:100%}.nav-actions{display:none}.trust-grid,.cards,.feature-grid,.service-grid,.projects-grid,.area-grid,.steps,.field-grid,.footer-grid{grid-template-columns:1fr}.offer-image{height:250px}.price-box{grid-template-columns:1fr}.visit-list{grid-template-columns:1fr}.comparison img{height:320px}.form-card{padding:22px}.site-header{position:relative}
+  .container{width:min(100% - 28px,1160px)}.section{padding:62px 0}.hero h1{font-size:50px}.hero-sub{font-size:18px}.hero-ctas .btn,.nav-actions .btn-primary{width:100%}.nav-actions{display:none}.trust-grid,.cards,.feature-grid,.service-grid,.steps,.field-grid,.footer-grid{grid-template-columns:1fr}.offer-image{height:250px}.price-box{grid-template-columns:1fr}.visit-list{grid-template-columns:1fr}.comparison img{height:320px}.form-card{padding:22px}.site-header{position:relative}
 }
 </style>
 <script type="application/ld+json">
@@ -257,7 +257,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
         <p class="hero-sub" data-i18n="heroSub">Give your property the festive makeover it deserves.</p>
         <p class="hero-copy" data-i18n="heroCopy">From a fresh home makeover to a complete property repaint, Siddh Sai Corporation helps you plan painting work with proper surface preparation, professional coordination and transparent estimation.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary js-track-cta" href="#book" data-i18n="primaryCta">Book My Painting Visit</a>
+          <a class="btn btn-primary js-track-cta js-quick-pay" href="#quick-payment" data-i18n="primaryCta">Book My Painting Visit</a>
           <a class="btn btn-secondary js-track-whatsapp" href="https://wa.me/917359359310?text=Hi%2C%20I%20want%20to%20book%20the%20Rs.%20249%20painting%20visit%20for%20my%20property%20in%20Surat." target="_blank" rel="noopener" data-i18n="secondaryCta">Talk to Our Team</a>
         </div>
         <div class="trust-line" aria-label="Trust proof">
@@ -381,49 +381,6 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
     </div>
   </section>
 
-  <section class="section" style="background:var(--cream-deep)">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Project proof</span>
-        <h2>Ready for real painting mini case studies.</h2>
-        <p>No invented testimonials, locations or results. These slots should be filled with approved Siddh Sai project information.</p>
-      </div>
-      <div class="projects-grid">
-        <article class="project" data-reveal><span class="status">Proof needed</span><h3>Residential Repaint</h3><p>Use this slot for an actual home, villa or bungalow painting project with location, surface condition, scope and final result.</p></article>
-        <article class="project" data-reveal><span class="status">Proof needed</span><h3>Texture Finish</h3><p>Add a verified texture or designer finish project when client-approved photos and details are available.</p></article>
-        <article class="project" data-reveal><span class="status">Proof needed</span><h3>Commercial Painting</h3><p>Add an office, retail or commercial renovation painting case once details are confirmed.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="background:var(--white)">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow" data-i18n="areaEyebrow">Surat area proof plan</span>
-        <h2 data-i18n="areaTitle">15 local review slots for Surat campaigns.</h2>
-        <p data-i18n="areaCopy">These are locality-specific conversion prompts and verified-review slots for Meta and Google Ads. Add real customer words here once collected and approved from each locality.</p>
-      </div>
-      <div class="area-grid">
-        <article class="area-card" data-reveal><div class="area">Adajan</div><strong>Fresh flat repaint before guests arrive</strong><p>Common intent: quick interior refresh, clean masking, clear estimate before Diwali.</p></article>
-        <article class="area-card" data-reveal><div class="area">Vesu</div><strong>Premium apartment colour planning</strong><p>Common intent: modern colours, texture wall options and furniture protection.</p></article>
-        <article class="area-card" data-reveal><div class="area">Piplod</div><strong>Bungalow exterior and interior scope</strong><p>Common intent: exterior exposure, surface prep and phased execution.</p></article>
-        <article class="area-card" data-reveal><div class="area">City Light</div><strong>Renovation painting without chaos</strong><p>Common intent: coordinate painting with ceiling, flooring or plaster repair.</p></article>
-        <article class="area-card" data-reveal><div class="area">Pal</div><strong>New colour without cost confusion</strong><p>Common intent: understand material, labour and finish options before starting.</p></article>
-        <article class="area-card" data-reveal><div class="area">Athwa</div><strong>Commercial repaint with less disruption</strong><p>Common intent: office or retail painting planned around business hours.</p></article>
-        <article class="area-card" data-reveal><div class="area">Althan</div><strong>Texture wall done with proper prep</strong><p>Common intent: feature wall finish, putty quality and clean handover.</p></article>
-        <article class="area-card" data-reveal><div class="area">Rander</div><strong>Old wall repaint with crack attention</strong><p>Common intent: fix surface issues before paint, not after peeling starts.</p></article>
-        <article class="area-card" data-reveal><div class="area">Katargam</div><strong>Practical home repaint planning</strong><p>Common intent: durable finish, room-wise coordination and clear timeline.</p></article>
-        <article class="area-card" data-reveal><div class="area">Udhna</div><strong>Shop and workspace painting</strong><p>Common intent: commercial repaint, enamel work and minimal downtime.</p></article>
-        <article class="area-card" data-reveal><div class="area">Varachha</div><strong>Budget clarity before painting starts</strong><p>Common intent: know what is included in prep, primer and finish.</p></article>
-        <article class="area-card" data-reveal><div class="area">Ghod Dod</div><strong>Premium finish for lived-in homes</strong><p>Common intent: protect furniture, flooring and fixtures during painting.</p></article>
-        <article class="area-card" data-reveal><div class="area">Nanpura</div><strong>Fast visit, clear next step</strong><p>Common intent: quick property visit and estimate path without long back-and-forth.</p></article>
-        <article class="area-card" data-reveal><div class="area">Majura Gate</div><strong>Interior repaint for older properties</strong><p>Common intent: wall condition check, prep scope and practical finish selection.</p></article>
-        <article class="area-card" data-reveal><div class="area">Dumas Road</div><strong>Exterior planning for weather exposure</strong><p>Common intent: exterior finish, surface condition and monsoon-aware planning.</p></article>
-      </div>
-      <div class="ethical-note" data-reveal><strong>Review policy:</strong> Use these cards as placeholders for real customer reviews only after you collect permission and exact wording. Until then, they work as locality-specific objection handling for Google and Meta traffic.</div>
-    </div>
-  </section>
-
   <section id="process" class="section process">
     <div class="container">
       <div class="section-head" data-reveal>
@@ -488,10 +445,27 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
     <div class="container" data-reveal>
       <h2 data-i18n="finalTitle">Your property can feel new again.</h2>
       <p data-i18n="finalCopy">Start with a simple painting visit. Understand the scope, discuss finishes and move forward with clarity.</p>
-      <a class="btn btn-dark js-track-cta" href="#book" data-i18n="primaryCta">Book My Painting Visit</a>
+      <a class="btn btn-dark js-track-cta js-quick-pay" href="#quick-payment" data-i18n="primaryCta">Book My Painting Visit</a>
     </div>
   </section>
 </main>
+
+<div class="quick-modal" id="quickPayModal" hidden aria-hidden="true">
+  <div class="quick-card" role="dialog" aria-modal="true" aria-labelledby="quickPayTitle">
+    <button class="quick-close" type="button" id="quickPayClose" aria-label="Close quick payment">×</button>
+    <h2 id="quickPayTitle" data-i18n="quickTitle">Pay for Your Painting Visit.</h2>
+    <p data-i18n="quickCopy">For customers already contacted by our team. Enter these details and continue directly to secure payment.</p>
+    <div class="quick-price"><span data-i18n="quickAmountLabel">Painting Visit Fee</span><strong id="quickAmount">Rs. 249</strong></div>
+    <form class="quick-form" id="quickPayForm" novalidate>
+      <div class="field"><label for="quickName" data-i18n="quickNameLabel">Name</label><input id="quickName" name="quick_name" autocomplete="name" required></div>
+      <div class="field"><label for="quickWhatsapp" data-i18n="quickWhatsappLabel">WhatsApp Number</label><input id="quickWhatsapp" name="quick_whatsapp" inputmode="numeric" autocomplete="tel" placeholder="10-digit WhatsApp" required></div>
+      <div class="field"><label for="quickPhone" data-i18n="quickPhoneLabel">Phone Number</label><input id="quickPhone" name="quick_phone" inputmode="numeric" autocomplete="tel" placeholder="10-digit phone" required></div>
+      <div id="quickPayStatus" class="form-status" role="status" aria-live="polite"></div>
+      <button class="btn btn-primary" type="submit" id="quickPaySubmit" data-i18n="quickSubmit">Continue to Payment</button>
+      <p class="quick-note" data-i18n="quickNote">No project form here. This is only for direct payment after team contact.</p>
+    </form>
+  </div>
+</div>
 
 <footer>
   <div class="container footer-grid">
@@ -533,18 +507,36 @@ var TEST_COUPON_AMOUNT_INR = 1;
 var currentLang = 'en';
 var copy = {
   en: {
-    navBook:'Book Rs. 249 Visit', mobileBook:'Book Visit', heroEyebrow:"Surat's painting & colouring team", heroTitle:'Naya Diwali.<br><span>Naya Rang.</span>', heroSub:'Give your property the festive makeover it deserves.', heroCopy:'From a fresh home makeover to a complete property repaint, Siddh Sai Corporation helps you plan painting work with proper surface preparation, professional coordination and transparent estimation.', primaryCta:'Book My Painting Visit', secondaryCta:'Talk to Our Team', offerTitle:'Painting Visit', offerCopy:'Book a professional visit to discuss your painting requirement, scope and next steps.', offerPoint1:'For homes, bungalows, villas and commercial properties in Surat.', offerPoint2:'Discuss colour, finish, surface condition, scope and estimation.', offerPoint3:'Offer subject to applicable campaign terms.', areaEyebrow:'Surat area proof plan', areaTitle:'15 local review slots for Surat campaigns.', areaCopy:'These are locality-specific conversion prompts and verified-review slots for Meta and Google Ads. Add real customer words here once collected and approved from each locality.', formEyebrow:'Book the visit', formTitle:"Let's Understand Your Painting Project.", formCopy:'Share the essentials. After payment, our team will contact you shortly regarding your painting visit.', nameLabel:'Name', phoneLabel:'Phone Number', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'Enter Your Area', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Enter a valid coupon before payment.', couponApplied:'Coupon applied. You will pay Rs. 1 for this test booking.', requirementLabel:'Painting Requirement', formHelp:'We do not ask for email or full address here. Keep the first step simple.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Secure payment via Razorpay. Offer subject to applicable campaign terms.', finalTitle:'Your property can feel new again.', finalCopy:'Start with a simple painting visit. Understand the scope, discuss finishes and move forward with clarity.', errName:'Please enter your name.', errPhone:'Please enter a valid 10-digit mobile number.', errProperty:'Please select your property type.', errArea:'Please select your area in Surat.', errAreaOther:'Please enter your area.', errRequirement:'Please describe your painting requirement.', payOpening:'Opening secure Razorpay checkout...', payCreating:'Creating secure payment...', payDismissed:'Payment was not completed. You can try again or message us on WhatsApp.', payError:'We could not open payment right now. Please try again or message us on WhatsApp.'
+    navBook:'Book Rs. 249 Visit', mobileBook:'Book Visit', heroEyebrow:"Surat's painting & colouring team", heroTitle:'Naya Diwali.<br><span>Naya Rang.</span>', heroSub:'Give your property the festive makeover it deserves.', heroCopy:'From a fresh home makeover to a complete property repaint, Siddh Sai Corporation helps you plan painting work with proper surface preparation, professional coordination and transparent estimation.', primaryCta:'Book My Painting Visit', secondaryCta:'Talk to Our Team', offerTitle:'Painting Visit', offerCopy:'Book a professional visit to discuss your painting requirement, scope and next steps.', offerPoint1:'For homes, bungalows, villas and commercial properties in Surat.', offerPoint2:'Discuss colour, finish, surface condition, scope and estimation.', offerPoint3:'Offer subject to applicable campaign terms.', formEyebrow:'Book the visit', formTitle:"Let's Understand Your Painting Project.", formCopy:'Share the essentials. After payment, our team will contact you shortly regarding your painting visit.', nameLabel:'Name', phoneLabel:'Phone Number', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'Enter Your Area', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Enter a valid coupon before payment.', couponApplied:'Coupon applied. You will pay Rs. 1 for this test booking.', requirementLabel:'Painting Requirement', formHelp:'We do not ask for email or full address here. Keep the first step simple.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Secure payment via Razorpay. Offer subject to applicable campaign terms.', finalTitle:'Your property can feel new again.', finalCopy:'Start with a simple painting visit. Understand the scope, discuss finishes and move forward with clarity.', errName:'Please enter your name.', errPhone:'Please enter a valid 10-digit mobile number.', errProperty:'Please select your property type.', errArea:'Please select your area in Surat.', errAreaOther:'Please enter your area.', errRequirement:'Please describe your painting requirement.', payOpening:'Opening secure Razorpay checkout...', payCreating:'Creating secure payment...', payDismissed:'Payment was not completed. You can try again or message us on WhatsApp.', payError:'We could not open payment right now. Please try again or message us on WhatsApp.'
   },
   hi: {
-    navBook:'Rs. 249 विजिट बुक करें', mobileBook:'विजिट बुक करें', heroEyebrow:'सूरत की पेंटिंग और कलरिंग टीम', heroTitle:'नई दिवाली.<br><span>नया रंग.</span>', heroSub:'अपनी प्रॉपर्टी को festive makeover दीजिए.', heroCopy:'Fresh home makeover हो या complete repaint, Siddh Sai Corporation proper surface preparation, professional coordination और clear estimate के साथ painting work plan करने में मदद करता है.', primaryCta:'मेरी पेंटिंग विजिट बुक करें', secondaryCta:'टीम से बात करें', offerTitle:'Painting Visit', offerCopy:'अपनी painting requirement, scope और next steps discuss करने के लिए professional visit book करें.', offerPoint1:'Surat में homes, bungalows, villas और commercial properties के लिए.', offerPoint2:'Colour, finish, surface condition, scope और estimation discuss करें.', offerPoint3:'Offer applicable campaign terms के अनुसार है.', areaEyebrow:'Surat area proof plan', areaTitle:'Surat campaigns के लिए 15 local review slots.', areaCopy:'ये Meta और Google Ads के लिए area-specific conversion prompts और verified-review slots हैं. Real customer words collect और approve होने के बाद यहाँ डालें.', formEyebrow:'विजिट बुक करें', formTitle:'आपका Painting Project समझते हैं.', formCopy:'Details share करें. Payment के बाद हमारी team painting visit के लिए आपसे contact करेगी.', nameLabel:'नाम', phoneLabel:'फोन नंबर', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'अपना Area लिखें', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Payment se pehle valid coupon enter karo.', couponApplied:'Coupon applied. Test booking amount is Rs. 1.', requirementLabel:'Painting Requirement', formHelp:'Email या full address नहीं चाहिए. First step simple रखें.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Razorpay secure payment. Offer campaign terms के अनुसार.', finalTitle:'आपकी property फिर से नई लग सकती है.', finalCopy:'Simple painting visit से start करें. Scope समझें, finishes discuss करें और clarity के साथ आगे बढ़ें.', errName:'कृपया अपना नाम डालें.', errPhone:'कृपया valid 10-digit mobile number डालें.', errProperty:'कृपया property type select करें.', errArea:'कृपया Surat में अपना area select करें.', errAreaOther:'कृपया अपना area लिखें.', errRequirement:'कृपया painting requirement लिखें.', payOpening:'Secure Razorpay checkout खुल रहा है...', payCreating:'Secure payment बन रहा है...', payDismissed:'Payment complete नहीं हुआ. फिर try करें या WhatsApp करें.', payError:'Payment अभी open नहीं हो पाया. फिर try करें या WhatsApp करें.'
+    navBook:'Rs. 249 विजिट बुक करें', mobileBook:'विजिट बुक करें', heroEyebrow:'सूरत की पेंटिंग और कलरिंग टीम', heroTitle:'नई दिवाली.<br><span>नया रंग.</span>', heroSub:'अपनी प्रॉपर्टी को festive makeover दीजिए.', heroCopy:'Fresh home makeover हो या complete repaint, Siddh Sai Corporation proper surface preparation, professional coordination और clear estimate के साथ painting work plan करने में मदद करता है.', primaryCta:'मेरी पेंटिंग विजिट बुक करें', secondaryCta:'टीम से बात करें', offerTitle:'Painting Visit', offerCopy:'अपनी painting requirement, scope और next steps discuss करने के लिए professional visit book करें.', offerPoint1:'Surat में homes, bungalows, villas और commercial properties के लिए.', offerPoint2:'Colour, finish, surface condition, scope और estimation discuss करें.', offerPoint3:'Offer applicable campaign terms के अनुसार है.', formEyebrow:'विजिट बुक करें', formTitle:'आपका Painting Project समझते हैं.', formCopy:'Details share करें. Payment के बाद हमारी team painting visit के लिए आपसे contact करेगी.', nameLabel:'नाम', phoneLabel:'फोन नंबर', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'अपना Area लिखें', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Payment se pehle valid coupon enter karo.', couponApplied:'Coupon applied. Test booking amount is Rs. 1.', requirementLabel:'Painting Requirement', formHelp:'Email या full address नहीं चाहिए. First step simple रखें.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Razorpay secure payment. Offer campaign terms के अनुसार.', finalTitle:'आपकी property फिर से नई लग सकती है.', finalCopy:'Simple painting visit से start करें. Scope समझें, finishes discuss करें और clarity के साथ आगे बढ़ें.', errName:'कृपया अपना नाम डालें.', errPhone:'कृपया valid 10-digit mobile number डालें.', errProperty:'कृपया property type select करें.', errArea:'कृपया Surat में अपना area select करें.', errAreaOther:'कृपया अपना area लिखें.', errRequirement:'कृपया painting requirement लिखें.', payOpening:'Secure Razorpay checkout खुल रहा है...', payCreating:'Secure payment बन रहा है...', payDismissed:'Payment complete नहीं हुआ. फिर try करें या WhatsApp करें.', payError:'Payment अभी open नहीं हो पाया. फिर try करें या WhatsApp करें.'
   },
   gu: {
-    navBook:'Rs. 249 વિઝિટ બુક કરો', mobileBook:'વિઝિટ બુક કરો', heroEyebrow:'સુરતની પેઇન્ટિંગ અને કલરિંગ ટીમ', heroTitle:'નવી દિવાળી.<br><span>નવો રંગ.</span>', heroSub:'તમારી પ્રોપર્ટીને festive makeover આપો.', heroCopy:'Fresh home makeover હોય કે complete repaint, Siddh Sai Corporation proper surface preparation, professional coordination અને transparent estimate સાથે painting work plan કરવામાં મદદ કરે છે.', primaryCta:'મારી પેઇન્ટિંગ વિઝિટ બુક કરો', secondaryCta:'ટીમ સાથે વાત કરો', offerTitle:'Painting Visit', offerCopy:'તમારી painting requirement, scope અને next steps discuss કરવા professional visit book કરો.', offerPoint1:'Surat માં homes, bungalows, villas અને commercial properties માટે.', offerPoint2:'Colour, finish, surface condition, scope અને estimation discuss કરો.', offerPoint3:'Offer applicable campaign terms મુજબ છે.', areaEyebrow:'Surat area proof plan', areaTitle:'Surat campaigns માટે 15 local review slots.', areaCopy:'Meta અને Google Ads માટે area-specific conversion prompts અને verified-review slots છે. Real customer words collect અને approve થયા પછી અહીં ઉમેરો.', formEyebrow:'વિઝિટ બુક કરો', formTitle:'તમારો Painting Project સમજીએ.', formCopy:'Details share કરો. Payment પછી અમારી team painting visit માટે contact કરશે.', nameLabel:'નામ', phoneLabel:'ફોન નંબર', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'તમારો Area લખો', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Payment se pehle valid coupon enter karo.', couponApplied:'Coupon applied. Test booking amount is Rs. 1.', requirementLabel:'Painting Requirement', formHelp:'Email કે full address નથી માંગતા. First step simple રાખીએ.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Razorpay secure payment. Offer campaign terms મુજબ.', finalTitle:'તમારી property ફરી નવી લાગી શકે છે.', finalCopy:'Simple painting visit થી start કરો. Scope સમજો, finishes discuss કરો અને clarity સાથે આગળ વધો.', errName:'કૃપા કરીને નામ લખો.', errPhone:'કૃપા કરીને valid 10-digit mobile number લખો.', errProperty:'કૃપા કરીને property type select કરો.', errArea:'કૃપા કરીને Surat માં તમારો area select કરો.', errAreaOther:'કૃપા કરીને તમારો area લખો.', errRequirement:'કૃપા કરીને painting requirement લખો.', payOpening:'Secure Razorpay checkout ખુલી રહ્યું છે...', payCreating:'Secure payment બની રહ્યું છે...', payDismissed:'Payment complete થયું નથી. ફરી try કરો અથવા WhatsApp કરો.', payError:'Payment અત્યારે open નથી થઈ શક્યું. ફરી try કરો અથવા WhatsApp કરો.'
+    navBook:'Rs. 249 વિઝિટ બુક કરો', mobileBook:'વિઝિટ બુક કરો', heroEyebrow:'સુરતની પેઇન્ટિંગ અને કલરિંગ ટીમ', heroTitle:'નવી દિવાળી.<br><span>નવો રંગ.</span>', heroSub:'તમારી પ્રોપર્ટીને festive makeover આપો.', heroCopy:'Fresh home makeover હોય કે complete repaint, Siddh Sai Corporation proper surface preparation, professional coordination અને transparent estimate સાથે painting work plan કરવામાં મદદ કરે છે.', primaryCta:'મારી પેઇન્ટિંગ વિઝિટ બુક કરો', secondaryCta:'ટીમ સાથે વાત કરો', offerTitle:'Painting Visit', offerCopy:'તમારી painting requirement, scope અને next steps discuss કરવા professional visit book કરો.', offerPoint1:'Surat માં homes, bungalows, villas અને commercial properties માટે.', offerPoint2:'Colour, finish, surface condition, scope અને estimation discuss કરો.', offerPoint3:'Offer applicable campaign terms મુજબ છે.', formEyebrow:'વિઝિટ બુક કરો', formTitle:'તમારો Painting Project સમજીએ.', formCopy:'Details share કરો. Payment પછી અમારી team painting visit માટે contact કરશે.', nameLabel:'નામ', phoneLabel:'ફોન નંબર', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'તમારો Area લખો', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Payment se pehle valid coupon enter karo.', couponApplied:'Coupon applied. Test booking amount is Rs. 1.', requirementLabel:'Painting Requirement', formHelp:'Email કે full address નથી માંગતા. First step simple રાખીએ.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Razorpay secure payment. Offer campaign terms મુજબ.', finalTitle:'તમારી property ફરી નવી લાગી શકે છે.', finalCopy:'Simple painting visit થી start કરો. Scope સમજો, finishes discuss કરો અને clarity સાથે આગળ વધો.', errName:'કૃપા કરીને નામ લખો.', errPhone:'કૃપા કરીને valid 10-digit mobile number લખો.', errProperty:'કૃપા કરીને property type select કરો.', errArea:'કૃપા કરીને Surat માં તમારો area select કરો.', errAreaOther:'કૃપા કરીને તમારો area લખો.', errRequirement:'કૃપા કરીને painting requirement લખો.', payOpening:'Secure Razorpay checkout ખુલી રહ્યું છે...', payCreating:'Secure payment બની રહ્યું છે...', payDismissed:'Payment complete થયું નથી. ફરી try કરો અથવા WhatsApp કરો.', payError:'Payment અત્યારે open નથી થઈ શક્યું. ફરી try કરો અથવા WhatsApp કરો.'
   },
   hinglish: {
-    navBook:'Rs. 249 Visit Book Karo', mobileBook:'Visit Book Karo', heroEyebrow:'Surat ki painting & colouring team', heroTitle:'Nayi Diwali.<br><span>Naya Rang.</span>', heroSub:'Apni property ko festive makeover do.', heroCopy:'Fresh home makeover ho ya complete repaint, Siddh Sai Corporation painting work ko proper surface prep, professional coordination aur clear estimate ke saath plan karne mein help karta hai.', primaryCta:'Meri Painting Visit Book Karo', secondaryCta:'Team se Baat Karo', offerTitle:'Painting Visit', offerCopy:'Apni painting requirement, scope aur next steps discuss karne ke liye professional visit book karo.', offerPoint1:'Surat ke homes, bungalows, villas aur commercial properties ke liye.', offerPoint2:'Colour, finish, surface condition, scope aur estimation discuss karo.', offerPoint3:'Offer applicable campaign terms ke according hai.', areaEyebrow:'Surat area proof plan', areaTitle:'Surat campaigns ke liye 15 local review slots.', areaCopy:'Yeh Meta aur Google Ads ke liye area-specific conversion prompts aur verified-review slots hain. Real customer words collect aur approve hone ke baad yahan add karo.', formEyebrow:'Visit book karo', formTitle:'Aapka Painting Project Samjhte Hain.', formCopy:'Basics share karo. Payment ke baad hamari team painting visit ke liye contact karegi.', nameLabel:'Name', phoneLabel:'Phone Number', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'Apna Area Likho', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Payment se pehle valid coupon enter karo.', couponApplied:'Coupon applied. Test booking amount is Rs. 1.', requirementLabel:'Painting Requirement', formHelp:'Email ya full address nahi chahiye. First step simple rakho.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Razorpay secure payment. Offer campaign terms ke according.', finalTitle:'Aapki property phir se nayi feel ho sakti hai.', finalCopy:'Simple painting visit se start karo. Scope samjho, finishes discuss karo aur clarity ke saath aage badho.', errName:'Please apna name enter karo.', errPhone:'Valid 10-digit mobile number enter karo.', errProperty:'Property type select karo.', errArea:'Surat mein apna area select karo.', errAreaOther:'Apna area enter karo.', errRequirement:'Painting requirement batao.', payOpening:'Secure Razorpay checkout open ho raha hai...', payCreating:'Secure payment create ho raha hai...', payDismissed:'Payment complete nahi hua. Dobara try karo ya WhatsApp karo.', payError:'Payment abhi open nahi ho paaya. Dobara try karo ya WhatsApp karo.'
+    navBook:'Rs. 249 Visit Book Karo', mobileBook:'Visit Book Karo', heroEyebrow:'Surat ki painting & colouring team', heroTitle:'Nayi Diwali.<br><span>Naya Rang.</span>', heroSub:'Apni property ko festive makeover do.', heroCopy:'Fresh home makeover ho ya complete repaint, Siddh Sai Corporation painting work ko proper surface prep, professional coordination aur clear estimate ke saath plan karne mein help karta hai.', primaryCta:'Meri Painting Visit Book Karo', secondaryCta:'Team se Baat Karo', offerTitle:'Painting Visit', offerCopy:'Apni painting requirement, scope aur next steps discuss karne ke liye professional visit book karo.', offerPoint1:'Surat ke homes, bungalows, villas aur commercial properties ke liye.', offerPoint2:'Colour, finish, surface condition, scope aur estimation discuss karo.', offerPoint3:'Offer applicable campaign terms ke according hai.', formEyebrow:'Visit book karo', formTitle:'Aapka Painting Project Samjhte Hain.', formCopy:'Basics share karo. Payment ke baad hamari team painting visit ke liye contact karegi.', nameLabel:'Name', phoneLabel:'Phone Number', propertyLabel:'Property Type', areaLabel:'Location / Area', areaOtherLabel:'Apna Area Likho', sizeLabel:'Approx. Property Size', timelineLabel:'Expected Timeline', couponLabel:'Coupon Code', couponHelp:'Optional. Payment se pehle valid coupon enter karo.', couponApplied:'Coupon applied. Test booking amount is Rs. 1.', requirementLabel:'Painting Requirement', formHelp:'Email ya full address nahi chahiye. First step simple rakho.', submitCta:'Book My Rs. 249 Painting Visit', submitCtaCoupon:'Pay Rs. 1 & Test Booking Flow', razorpayHelp:'Razorpay secure payment. Offer campaign terms ke according.', finalTitle:'Aapki property phir se nayi feel ho sakti hai.', finalCopy:'Simple painting visit se start karo. Scope samjho, finishes discuss karo aur clarity ke saath aage badho.', errName:'Please apna name enter karo.', errPhone:'Valid 10-digit mobile number enter karo.', errProperty:'Property type select karo.', errArea:'Surat mein apna area select karo.', errAreaOther:'Apna area enter karo.', errRequirement:'Painting requirement batao.', payOpening:'Secure Razorpay checkout open ho raha hai...', payCreating:'Secure payment create ho raha hai...', payDismissed:'Payment complete nahi hua. Dobara try karo ya WhatsApp karo.', payError:'Payment abhi open nahi ho paaya. Dobara try karo ya WhatsApp karo.'
   }
 };
+Object.assign(copy.en, {
+  primaryCta:'Pay Rs. 249 Now',
+  quickTitle:'Pay for Your Painting Visit.',
+  quickCopy:'For customers already contacted by our team. Enter these details and continue directly to secure payment.',
+  quickAmountLabel:'Painting Visit Fee',
+  quickNameLabel:'Name',
+  quickWhatsappLabel:'WhatsApp Number',
+  quickPhoneLabel:'Phone Number',
+  quickSubmit:'Continue to Payment',
+  quickNote:'No project form here. This is only for direct payment after team contact.',
+  errWhatsapp:'Please enter a valid 10-digit WhatsApp number.'
+});
+['hi','gu','hinglish'].forEach(function(lang){
+  Object.keys(copy.en).forEach(function(key){
+    if(!copy[lang][key]) copy[lang][key] = copy.en[key];
+  });
+  copy[lang].primaryCta = 'Pay Rs. 249 Now';
+});
 function t(key){ return (copy[currentLang] && copy[currentLang][key]) || copy.en[key] || ''; }
 function applyLanguage(lang){
   currentLang = lang;
@@ -612,6 +604,72 @@ function updateCouponUi(){
   btn.textContent = pricing.coupon ? t('submitCtaCoupon') : t('submitCta');
 }
 
+function getQuickCoupon(){
+  var params = new URLSearchParams(window.location.search);
+  return (params.get('coupon') || '').trim().toUpperCase();
+}
+
+function setQuickStatus(type, message){
+  var status = document.getElementById('quickPayStatus');
+  status.className = 'form-status ' + type;
+  status.textContent = message;
+}
+
+function updateQuickAmount(){
+  var pricing = getPaintingPricing(getQuickCoupon());
+  document.getElementById('quickAmount').textContent = 'Rs. ' + pricing.amount;
+}
+
+function openQuickPay(){
+  var modal = document.getElementById('quickPayModal');
+  modal.hidden = false;
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  setQuickStatus('', '');
+  updateQuickAmount();
+  trackEvent('quick_payment_open');
+  setTimeout(function(){ document.getElementById('quickName').focus(); }, 0);
+}
+
+function closeQuickPay(){
+  var modal = document.getElementById('quickPayModal');
+  modal.hidden = true;
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function resetPaymentButtons(){
+  var submitBtn = document.getElementById('submitBtn');
+  var quickBtn = document.getElementById('quickPaySubmit');
+  if(submitBtn){ submitBtn.disabled = false; updateCouponUi(); }
+  if(quickBtn){ quickBtn.disabled = false; quickBtn.textContent = t('quickSubmit'); }
+}
+
+function collectQuickForm(){
+  var pricing = getPaintingPricing(getQuickCoupon());
+  return {
+    name: document.getElementById('quickName').value.trim(),
+    whatsapp: document.getElementById('quickWhatsapp').value.replace(/\D/g, ''),
+    phone: document.getElementById('quickPhone').value.replace(/\D/g, ''),
+    property_type: 'Direct payment after lead contact',
+    area: 'Not collected - direct payment',
+    size: 'Not collected',
+    timeline: 'Team already contacted customer',
+    requirement: 'Direct painting visit payment after Meta/lead follow-up',
+    coupon: pricing.coupon,
+    amountInr: pricing.amount,
+    discountInr: pricing.discount,
+    quick_payment: true
+  };
+}
+
+function validateQuick(details){
+  if(!details.name) return t('errName');
+  if(!/^[6-9][0-9]{9}$/.test(details.whatsapp)) return t('errWhatsapp');
+  if(!/^[6-9][0-9]{9}$/.test(details.phone)) return t('errPhone');
+  return '';
+}
+
 function collectForm(){
   var areaSelect = document.getElementById('areaSelect').value;
   var areaOther = document.getElementById('areaOther').value.trim();
@@ -665,6 +723,7 @@ function sendLeadMirror(details, eventId){
       Service: 'Painting Visit - Rs. 249',
       Name: details.name,
       Phone: details.phone,
+      'WhatsApp Number': details.whatsapp || details.phone,
       'Property Type': details.property_type,
       'Area in Surat': details.area,
       'Approx Property Size': details.size || 'Not specified',
@@ -682,6 +741,7 @@ function sendLeadMirror(details, eventId){
       'UTM Term': tracking.utm_term || '',
       'UTM Content': tracking.utm_content || '',
       'Landing Page': tracking.page_url,
+      'Booking Flow': details.quick_payment ? 'Quick payment modal' : 'Full booking form',
       'Event ID': eventId
     })
   }).catch(function(){});
@@ -698,15 +758,16 @@ function openCheckout(details, order){
     name: 'Siddh Sai Corporation',
     description: 'Painting Visit - Surat',
     order_id: order.id,
-    prefill: {name: details.name, contact: details.phone},
+    prefill: {name: details.name, contact: details.whatsapp || details.phone},
     notes: {
       service: 'Painting Visit',
       property_type: details.property_type,
       area: details.area,
+      whatsapp: details.whatsapp || details.phone,
       requirement: details.requirement,
       coupon_code: details.coupon || 'none',
       discount_inr: details.discountInr || 0,
-      source_page: 'painting-landing'
+      source_page: details.quick_payment ? 'painting-landing-quick-payment' : 'painting-landing'
     },
     theme: {color:'#0F2240'},
     handler: function(response){
@@ -724,9 +785,9 @@ function openCheckout(details, order){
     modal: {
       ondismiss: function(){
         trackEvent('painting_payment_dismissed');
-        setStatus('error', t('payDismissed'));
-        document.getElementById('submitBtn').disabled = false;
-        updateCouponUi();
+        if(details.quick_payment) setQuickStatus('error', t('payDismissed'));
+        else setStatus('error', t('payDismissed'));
+        resetPaymentButtons();
       }
     }
   };
@@ -757,6 +818,19 @@ document.querySelectorAll('.js-track-whatsapp').forEach(function(el){
 document.querySelectorAll('.js-track-call').forEach(function(el){
   el.addEventListener('click', function(){ trackEvent('call_click'); });
 });
+document.querySelectorAll('.js-quick-pay').forEach(function(el){
+  el.addEventListener('click', function(event){
+    event.preventDefault();
+    openQuickPay();
+  });
+});
+document.getElementById('quickPayClose').addEventListener('click', closeQuickPay);
+document.getElementById('quickPayModal').addEventListener('click', function(event){
+  if(event.target === this) closeQuickPay();
+});
+document.addEventListener('keydown', function(event){
+  if(event.key === 'Escape' && !document.getElementById('quickPayModal').hidden) closeQuickPay();
+});
 document.getElementById('areaSelect').addEventListener('change', function(){
   var isOther = this.value === 'Other';
   var wrap = document.getElementById('areaOtherWrap');
@@ -777,6 +851,36 @@ document.getElementById('couponCode').addEventListener('input', updateCouponUi);
 var started = false;
 document.getElementById('paintingForm').addEventListener('input', function(){
   if(!started){ started = true; trackEvent('form_start', {form_name:'painting_visit'}); }
+});
+
+document.getElementById('quickPayForm').addEventListener('submit', async function(event){
+  event.preventDefault();
+  var details = collectQuickForm();
+  var error = validateQuick(details);
+  if(error){ setQuickStatus('error', error); return; }
+
+  var btn = document.getElementById('quickPaySubmit');
+  var eventId = 'painting_quick_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
+  btn.disabled = true;
+  btn.textContent = t('payCreating');
+  setQuickStatus('success', t('payOpening'));
+  trackEvent('quick_payment_submit', {event_id:eventId, value:details.amountInr, currency:'INR', coupon:details.coupon || undefined});
+  sendLeadMirror(details, eventId);
+
+  try{
+    var response = await fetch('/api/create-order-painting', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(Object.assign({}, details, {tracking:getTrackingParams()}))
+    });
+    var order = await response.json();
+    if(!response.ok) throw new Error(order.error || 'Could not create payment order.');
+    openCheckout(details, order);
+  }catch(err){
+    resetPaymentButtons();
+    setQuickStatus('error', t('payError'));
+    trackEvent('painting_order_error', {flow:'quick_payment'});
+  }
 });
 
 document.getElementById('paintingForm').addEventListener('submit', async function(event){
