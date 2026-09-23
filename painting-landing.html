@@ -458,8 +458,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
     <div class="quick-price"><span data-i18n="quickAmountLabel">Painting Visit Fee</span><strong id="quickAmount">Rs. 249</strong></div>
     <form class="quick-form" id="quickPayForm" novalidate>
       <div class="field"><label for="quickName" data-i18n="quickNameLabel">Name</label><input id="quickName" name="quick_name" autocomplete="name" required></div>
-      <div class="field"><label for="quickWhatsapp" data-i18n="quickWhatsappLabel">WhatsApp Number</label><input id="quickWhatsapp" name="quick_whatsapp" inputmode="numeric" autocomplete="tel" placeholder="10-digit WhatsApp" required></div>
-      <div class="field"><label for="quickPhone" data-i18n="quickPhoneLabel">Phone Number</label><input id="quickPhone" name="quick_phone" inputmode="numeric" autocomplete="tel" placeholder="10-digit phone" required></div>
+      <div class="field"><label for="quickContact" data-i18n="quickContactLabel">WhatsApp / Phone Number</label><input id="quickContact" name="quick_contact" inputmode="numeric" autocomplete="tel" placeholder="10-digit WhatsApp or phone" required></div>
       <div id="quickPayStatus" class="form-status" role="status" aria-live="polite"></div>
       <button class="btn btn-primary" type="submit" id="quickPaySubmit" data-i18n="quickSubmit">Continue to Payment</button>
       <p class="quick-note" data-i18n="quickNote">No project form here. This is only for direct payment after team contact.</p>
@@ -525,11 +524,10 @@ Object.assign(copy.en, {
   quickCopy:'For customers already contacted by our team. Enter these details and continue directly to secure payment.',
   quickAmountLabel:'Painting Visit Fee',
   quickNameLabel:'Name',
-  quickWhatsappLabel:'WhatsApp Number',
-  quickPhoneLabel:'Phone Number',
+  quickContactLabel:'WhatsApp / Phone Number',
   quickSubmit:'Continue to Payment',
   quickNote:'No project form here. This is only for direct payment after team contact.',
-  errWhatsapp:'Please enter a valid 10-digit WhatsApp number.'
+  errContact:'Please enter a valid 10-digit WhatsApp or phone number.'
 });
 ['hi','gu','hinglish'].forEach(function(lang){
   Object.keys(copy.en).forEach(function(key){
@@ -647,10 +645,11 @@ function resetPaymentButtons(){
 
 function collectQuickForm(){
   var pricing = getPaintingPricing(getQuickCoupon());
+  var contact = document.getElementById('quickContact').value.replace(/\D/g, '');
   return {
     name: document.getElementById('quickName').value.trim(),
-    whatsapp: document.getElementById('quickWhatsapp').value.replace(/\D/g, ''),
-    phone: document.getElementById('quickPhone').value.replace(/\D/g, ''),
+    whatsapp: contact,
+    phone: contact,
     property_type: 'Direct payment after lead contact',
     area: 'Not collected - direct payment',
     size: 'Not collected',
@@ -665,8 +664,7 @@ function collectQuickForm(){
 
 function validateQuick(details){
   if(!details.name) return t('errName');
-  if(!/^[6-9][0-9]{9}$/.test(details.whatsapp)) return t('errWhatsapp');
-  if(!/^[6-9][0-9]{9}$/.test(details.phone)) return t('errPhone');
+  if(!/^[6-9][0-9]{9}$/.test(details.phone)) return t('errContact');
   return '';
 }
 
