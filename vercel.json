@@ -21,6 +21,14 @@
     {
       "source": "/booking-confirmed",
       "destination": "/booking-confirmed.html"
+    },
+    {
+      "source": "/painting-landing",
+      "destination": "/painting-landing.html"
+    },
+    {
+      "source": "/painting-visit-confirmed",
+      "destination": "/painting-visit-confirmed.html"
     }
   ],
   "headers": [

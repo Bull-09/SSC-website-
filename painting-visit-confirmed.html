@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painting Visit Booked | Siddh Sai Corporation</title>
+<meta name="description" content="Your Rs. 249 painting visit booking was successful. Siddh Sai Corporation will contact you shortly.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://siddhsaicorporation.in/painting-visit-confirmed.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5M880EP05"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-R5M880EP05');
+</script>
+<style>
+:root{--navy:#0F2240;--navy-deep:#08172d;--gold:#D4A847;--cream:#FAF6F0;--white:#fff;--muted:#6B6862;--green:#1c9b52}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 80% 10%,rgba(212,168,71,.18),transparent 34%),var(--cream);font-family:Inter,system-ui,sans-serif;color:var(--navy);padding:28px}
+.card{width:min(580px,100%);background:var(--white);border-radius:28px;padding:38px;box-shadow:0 24px 70px rgba(8,23,45,.14);border-top:7px solid var(--gold)}
+.icon{width:72px;height:72px;border-radius:50%;background:#e9f8ef;color:var(--green);display:grid;place-items:center;margin-bottom:22px}
+.icon svg{width:38px;height:38px}
+h1{font-family:Fraunces,serif;font-size:clamp(30px,5vw,42px);line-height:1.08;margin-bottom:12px}
+p{line-height:1.75;color:var(--muted);margin-bottom:20px}
+.details{background:var(--cream);border-radius:18px;padding:18px;margin:24px 0}
+.row{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid rgba(15,34,64,.1);padding:10px 0;font:700 14px Manrope,sans-serif}
+.row:last-child{border-bottom:0}
+.row span:first-child{color:var(--muted)}
+.row span:last-child{text-align:right;color:var(--navy)}
+.actions{display:grid;gap:12px;margin-top:20px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:999px;text-decoration:none;font:800 15px Manrope,sans-serif}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-gold{background:var(--gold);color:#231804}
+.note{font-size:12px;color:rgba(15,34,64,.5);margin-top:18px;margin-bottom:0}
+@media(max-width:520px){.card{padding:28px 20px}.row{flex-direction:column;gap:4px}.row span:last-child{text-align:left}}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+  <h1>Your Painting Visit is Booked.</h1>
+  <p id="summary">Thank you. Your Rs. 249 painting visit payment has been received. Our team will contact you shortly to discuss your property and schedule the next step.</p>
+  <div class="details">
+    <div class="row"><span>Name</span><span id="name">Not available in this session</span></div>
+    <div class="row"><span>Phone</span><span id="phone">Not available in this session</span></div>
+    <div class="row"><span>Service</span><span>Painting Visit</span></div>
+    <div class="row"><span>Amount Paid</span><span id="amount">Rs. 249</span></div>
+    <div class="row"><span>Payment Reference</span><span id="payment">-</span></div>
+  </div>
+  <p>What happens next: our team will call you, understand your painting requirement, and guide you on the property visit, scope and estimate.</p>
+  <div class="actions">
+    <a class="btn btn-gold" href="https://wa.me/919924442799?text=Hi%2C%20I%20just%20booked%20a%20Rs.%20249%20painting%20visit." target="_blank" rel="noopener">Message on WhatsApp</a>
+    <a class="btn btn-primary" href="tel:+917359359310">Call +91 73593 59310</a>
+    <a class="btn btn-primary" href="painting-landing.html">Back to Painting Page</a>
+  </div>
+  <p class="note">Keep your payment reference for your records. Offer subject to applicable campaign terms.</p>
+</main>
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var paymentId = params.get('payment_id') || '';
+  var amount = params.get('amount') || '249';
+  var booking = null;
+  try{
+    var raw = sessionStorage.getItem('ssc_painting_booking');
+    if(raw) booking = JSON.parse(raw);
+  }catch(err){}
+  if(booking && (!paymentId || booking.payment_id === paymentId)){
+    document.getElementById('name').textContent = booking.name || 'Not available';
+    document.getElementById('phone').textContent = booking.phone || 'Not available';
+    document.getElementById('summary').textContent = 'Thank you, ' + booking.name + '. Your Rs. 249 painting visit payment has been received. Our team will contact you shortly on ' + booking.phone + '.';
+  }
+  document.getElementById('payment').textContent = paymentId || 'Not available';
+  document.getElementById('amount').textContent = 'Rs. ' + amount;
+  if(typeof gtag === 'function'){
+    gtag('event','painting_visit_confirmation_view',{event_category:'painting_landing',value:Number(amount || 249),currency:'INR'});
+  }
+})();
+</script>
+</body>
+</html>

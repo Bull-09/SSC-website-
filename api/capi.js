@@ -33,6 +33,8 @@ async function handleLead(body, res) {
   const email = String(body.email || '').trim().toLowerCase();
   const nameParts = String(body.name || '').trim().toLowerCase().split(/\s+/, 2);
   const tracking = body.tracking && typeof body.tracking === 'object' ? body.tracking : {};
+  const sourceUrl = String(body.source_url || 'https://siddhsaicorporation.in/waterproofing-landing-399.html').trim();
+  const service = String(body.service || 'Waterproofing Expert Inspection').trim();
 
   const userData = {
     country: [hash('in')]
@@ -46,11 +48,14 @@ async function handleLead(body, res) {
     event_name: 'Lead',
     event_time: Math.floor(Date.now() / 1000),
     action_source: 'website',
-    event_source_url: 'https://siddhsaicorporation.in/waterproofing-landing-399.html',
+    event_source_url: sourceUrl,
     user_data: userData,
     custom_data: {
+      service,
       lead_type: body.problem || '',
       area: body.area || '',
+      property_type: body.property_type || '',
+      requirement: body.requirement || '',
       gclid: tracking.gclid || '',
       gbraid: tracking.gbraid || '',
       wbraid: tracking.wbraid || '',
@@ -92,6 +97,15 @@ async function handlePurchase(req, rawBody, body, res) {
 
   const phone = normalizeIndiaPhone(payment.contact);
   const email = String(payment.email || '').trim().toLowerCase();
+  const notes = payment.notes && typeof payment.notes === 'object' ? payment.notes : {};
+  const sourcePage = String(notes.source_page || '').trim();
+  const service = String(notes.service || 'Waterproofing Expert Inspection').trim();
+  const eventSourceUrl = sourcePage
+    ? `https://siddhsaicorporation.in/${sourcePage}.html`
+    : 'https://siddhsaicorporation.in/waterproofing-landing-399.html';
+  const contentId = sourcePage === 'painting-landing'
+    ? 'painting-visit-249'
+    : 'waterproofing-inspection-399';
 
   const userData = {
     country: [hash('in')]
@@ -104,14 +118,14 @@ async function handlePurchase(req, rawBody, body, res) {
     event_name: 'Purchase',
     event_time: Math.floor(Date.now() / 1000),
     action_source: 'website',
-    event_source_url: 'https://siddhsaicorporation.in/waterproofing-landing-399.html',
+    event_source_url: eventSourceUrl,
     event_id: payment.id || `pay_${Date.now()}`,
     user_data: userData,
     custom_data: {
       currency: 'INR',
       value: Number(amountInr),
-      content_name: 'Waterproofing Expert Inspection',
-      content_ids: ['waterproofing-inspection-399']
+      content_name: service,
+      content_ids: [contentId]
     }
   };
 
