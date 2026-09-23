@@ -524,6 +524,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var RAZORPAY_KEY_ID = 'rzp_live_TABtLn6YJBosEB';
+var WEB3FORMS_ACCESS_KEY = '496520dd-3cf4-483a-8b74-7d3a2898bdc3';
 var currentLang = 'en';
 var copy = {
   en: {
@@ -565,6 +566,8 @@ function getTrackingParams(){
       }catch(err){}
     }
   });
+  data.page_url = window.location.href;
+  data.landing_page = window.location.pathname;
   return data;
 }
 
@@ -607,16 +610,45 @@ function validate(details){
   return '';
 }
 
-function sendLeadMirror(details){
+function sendLeadMirror(details, eventId){
+  var tracking = getTrackingParams();
   var body = Object.assign({}, details, {
     service: 'Painting Visit',
     source_url: 'https://siddhsaicorporation.in/painting-landing.html',
-    tracking: getTrackingParams()
+    event_id: eventId,
+    tracking: tracking
   });
   fetch('/api/capi?type=lead', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify(body)
+  }).catch(function(){});
+  fetch('https://api.web3forms.com/submit', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: 'New Painting Visit Lead - ' + details.name + ' - ' + details.area,
+      from_name: 'SSC Painting Landing Page',
+      Service: 'Painting Visit - Rs. 249',
+      Name: details.name,
+      Phone: details.phone,
+      'Property Type': details.property_type,
+      'Area in Surat': details.area,
+      'Approx Property Size': details.size || 'Not specified',
+      'Expected Timeline': details.timeline || 'Not specified',
+      'Painting Requirement': details.requirement,
+      'Google Click ID': tracking.gclid || '',
+      'Google GBRAID': tracking.gbraid || '',
+      'Google WBRAID': tracking.wbraid || '',
+      'UTM Source': tracking.utm_source || '',
+      'UTM Medium': tracking.utm_medium || '',
+      'UTM Campaign': tracking.utm_campaign || '',
+      'UTM Term': tracking.utm_term || '',
+      'UTM Content': tracking.utm_content || '',
+      'Landing Page': tracking.page_url,
+      'Event ID': eventId
+    })
   }).catch(function(){});
 }
 
@@ -702,11 +734,13 @@ document.getElementById('paintingForm').addEventListener('submit', async functio
   if(error){ setStatus('error', error); return; }
 
   var btn = document.getElementById('submitBtn');
+  var eventId = 'painting_lead_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
   btn.disabled = true;
   btn.textContent = t('payCreating');
   setStatus('success', t('payOpening'));
-  trackEvent('painting_visit_booking_attempt', {property_type:details.property_type});
-  sendLeadMirror(details);
+  trackEvent('painting_visit_booking_attempt', {property_type:details.property_type, event_id:eventId});
+  trackEvent('form_submit', {form_name:'painting_visit', event_id:eventId});
+  sendLeadMirror(details, eventId);
 
   try{
     var response = await fetch('/api/create-order-painting', {
