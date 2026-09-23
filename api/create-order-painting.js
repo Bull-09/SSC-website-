@@ -1,4 +1,6 @@
 const FULL_AMOUNT_PAISE = 24900;
+const TEST_COUPON = 'NISHANTISGOD';
+const TEST_COUPON_AMOUNT_PAISE = 100;
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -27,11 +29,15 @@ module.exports = async function handler(req, res) {
   const requirement = String(body.requirement || '').trim();
   const size = String(body.size || '').trim();
   const timeline = String(body.timeline || '').trim();
+  const coupon = String(body.coupon || '').trim().toUpperCase();
 
   if (!name || !/^[6-9][0-9]{9}$/.test(phone) || !propertyType || !area || !requirement) {
     return res.status(400).json({ error: 'Please enter valid painting visit details' });
   }
 
+  const couponApplied = coupon === TEST_COUPON;
+  const amountPaise = couponApplied ? TEST_COUPON_AMOUNT_PAISE : FULL_AMOUNT_PAISE;
+  const discountPaise = FULL_AMOUNT_PAISE - amountPaise;
   const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
   const receipt = `ssc_paint_${Date.now()}`;
 
@@ -42,7 +48,7 @@ module.exports = async function handler(req, res) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      amount: FULL_AMOUNT_PAISE,
+      amount: amountPaise,
       currency: 'INR',
       receipt,
       notes: {
@@ -54,6 +60,8 @@ module.exports = async function handler(req, res) {
         requirement,
         size: size || 'not specified',
         timeline: timeline || 'not specified',
+        coupon_code: couponApplied ? TEST_COUPON : 'none',
+        discount_inr: String(discountPaise / 100),
         source_page: 'painting-landing'
       }
     })
@@ -71,6 +79,8 @@ module.exports = async function handler(req, res) {
     id: data.id,
     amount: data.amount,
     currency: data.currency,
-    receipt: data.receipt
+    receipt: data.receipt,
+    coupon: couponApplied ? TEST_COUPON : '',
+    discount: discountPaise / 100
   });
 };
