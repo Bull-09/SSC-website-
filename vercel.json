@@ -27,6 +27,14 @@
       "destination": "/painting-landing.html"
     },
     {
+      "source": "/painting-google",
+      "destination": "/painting-landing.html"
+    },
+    {
+      "source": "/painting-meta",
+      "destination": "/painting-landing.html"
+    },
+    {
       "source": "/painting-visit-confirmed",
       "destination": "/painting-visit-confirmed.html"
     }
