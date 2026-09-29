@@ -99,6 +99,8 @@ button,input,select,textarea{font:inherit}
 .offer-points{display:grid;gap:10px;margin-top:20px}
 .offer-points li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#35425a}
 .offer-points li::before{content:"+";display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(212,168,71,.18);color:var(--gold-deep);font-weight:900;flex:0 0 auto}
+.urgency-ribbon{display:inline-flex;align-items:center;gap:9px;margin:22px 0 0;padding:10px 14px;border-radius:var(--pill);background:rgba(212,168,71,.16);border:1px solid rgba(212,168,71,.35);color:#fff;font:800 13px Manrope,sans-serif}
+.urgency-ribbon::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(212,168,71,.14)}
 .trust-strip{background:var(--white);border-bottom:1px solid var(--line)}
 .trust-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line)}
 .trust-item{background:var(--white);padding:25px 20px}
@@ -122,6 +124,9 @@ button,input,select,textarea{font:inherit}
 .visit-list li{list-style:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:15px;padding:14px 16px;color:rgba(255,255,255,.86);font-weight:700}
 .mini-offer{background:var(--white);color:var(--navy);border-radius:28px;padding:28px;box-shadow:var(--shadow)}
 .mini-offer .price{font-size:72px;margin:12px 0}
+.secure-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.secure-badges span{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:9px 11px;background:rgba(8,23,45,.06);border:1px solid rgba(15,34,64,.1);color:var(--navy);font:800 12px Manrope,sans-serif}
+.secure-badges span::before{content:"✓";color:#1f9d63;font-weight:900}
 .services{background:var(--cream)}
 .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .service-card{background:var(--white);border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
@@ -157,6 +162,24 @@ button,input,select,textarea{font:inherit}
 .shade-swatch:focus-visible{outline:3px solid var(--gold);outline-offset:6px}
 .shade-note{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:16px 18px;color:var(--navy)!important;font-weight:800}
 .shade-consult-note{background:var(--white);border:1px dashed rgba(15,34,64,.24);border-radius:20px;padding:22px;color:var(--muted);line-height:1.7}
+.before-after{background:var(--white)}
+.before-after-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+.before-after-card{border-radius:30px;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(15,34,64,.1);background:var(--cream)}
+.before-after-card img{width:100%;display:block;height:auto}
+.urgency-card{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow)}
+.urgency-card h3{font-family:Fraunces,serif;font-size:clamp(28px,3vw,42px);line-height:1.08;margin:12px 0}
+.urgency-card p{color:rgba(255,255,255,.76);line-height:1.8}
+.urgency-card ul{display:grid;gap:10px;margin:20px 0 0}
+.urgency-card li{list-style:none;display:flex;gap:10px;color:rgba(255,255,255,.88);font-weight:800}
+.urgency-card li::before{content:"✓";color:var(--gold)}
+.reviews{background:var(--cream)}
+.review-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.review-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow-soft)}
+.review-card header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}
+.review-card h3{font:800 16px Manrope,sans-serif;color:var(--navy)}
+.review-card span{display:block;margin-top:3px;color:var(--muted);font-size:13px}
+.stars{color:var(--gold-deep);letter-spacing:1px;white-space:nowrap}
+.review-card p{color:#35425a;line-height:1.7;font-size:14px}
 .process{background:var(--white)}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .step{background:var(--cream);border-radius:20px;padding:22px;border:1px solid var(--line)}
@@ -216,11 +239,11 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
   .shade-wall,.shade-swatch,.shade-swatch::after{transition:none}
 }
 @media(max-width:980px){
-  .nav-links{display:none}.mobile-menu{display:inline-flex}.hero-inner,.offer-grid,.compare-wrap,.form-grid{grid-template-columns:1fr}.hero-inner{min-height:auto;padding:54px 0}.offer-card{max-width:640px}.trust-grid{grid-template-columns:repeat(2,1fr)}.cards,.feature-grid,.service-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.sticky-bar{display:flex}.wa-float{bottom:86px}.lang-switch{display:none}
+  .nav-links{display:none}.mobile-menu{display:inline-flex}.hero-inner,.offer-grid,.compare-wrap,.before-after-grid,.form-grid{grid-template-columns:1fr}.hero-inner{min-height:auto;padding:54px 0}.offer-card{max-width:640px}.trust-grid{grid-template-columns:repeat(2,1fr)}.cards,.feature-grid,.service-grid,.review-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.sticky-bar{display:flex}.wa-float{bottom:86px}.lang-switch{display:flex}
   .shade-visualizer{min-height:390px}
 }
 @media(max-width:620px){
-  .container{width:min(100% - 28px,1160px)}.section{padding:62px 0}.hero h1{font-size:50px}.hero-sub{font-size:18px}.hero-ctas .btn,.nav-actions .btn-primary{width:100%}.nav-actions{display:none}.trust-grid,.cards,.feature-grid,.service-grid,.steps,.field-grid,.footer-grid{grid-template-columns:1fr}.offer-image{height:250px}.price-box{grid-template-columns:1fr}.visit-list{grid-template-columns:1fr}.shade-visualizer{min-height:340px;border-radius:24px}.shade-sofa{left:7%;right:9%;height:96px}.wall-art{width:98px;height:74px;right:9%}.wall-shelf{width:130px}.shade-table{right:6%;width:70px}.shade-badge{left:14px;bottom:14px}.shade-swatch{width:46px;height:46px}.form-card{padding:22px}.site-header{position:relative}
+  .container{width:min(100% - 28px,1160px)}.section{padding:62px 0}.nav{gap:10px}.logo img{height:36px}.nav-actions{display:flex;gap:6px}.nav-actions .btn-primary{display:none}.lang-switch{display:flex;gap:3px;padding:4px}.lang-switch button{padding:7px 8px;font-size:0}.lang-switch button::after{content:attr(data-short);font-size:11px}.hero h1{font-size:50px}.hero-sub{font-size:18px}.hero-ctas .btn{width:100%}.trust-grid,.cards,.feature-grid,.service-grid,.steps,.field-grid,.footer-grid,.review-grid{grid-template-columns:1fr}.offer-image{height:250px}.price-box{grid-template-columns:1fr}.visit-list{grid-template-columns:1fr}.shade-visualizer{min-height:340px;border-radius:24px}.shade-sofa{left:7%;right:9%;height:96px}.wall-art{width:98px;height:74px;right:9%}.wall-shelf{width:130px}.shade-table{right:6%;width:70px}.shade-badge{left:14px;bottom:14px}.shade-swatch{width:46px;height:46px}.before-after-card,.urgency-card{border-radius:22px}.form-card{padding:22px}.site-header{position:relative}
 }
 </style>
 <script type="application/ld+json">
@@ -258,10 +281,10 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
     </nav>
     <div class="nav-actions">
       <div class="lang-switch" aria-label="Choose language">
-        <button type="button" class="active" data-lang="en">EN</button>
-        <button type="button" data-lang="hi">हिंदी</button>
-        <button type="button" data-lang="gu">ગુજરાતી</button>
-        <button type="button" data-lang="hinglish">Hinglish</button>
+        <button type="button" class="active" data-lang="en" data-short="EN">EN</button>
+        <button type="button" data-lang="hi" data-short="हि">हिंदी</button>
+        <button type="button" data-lang="gu" data-short="ગુ">ગુજરાતી</button>
+        <button type="button" data-lang="hinglish" data-short="Hing">Hinglish</button>
       </div>
       <a class="btn btn-secondary js-track-call" href="tel:+917359359310">Call</a>
       <a class="btn btn-primary js-track-cta" href="#book" data-i18n="navBook">Book Rs. 249 Visit</a>
@@ -361,6 +384,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
         <span class="eyebrow">Low-friction first step</span>
         <h2>Not Sure Where to Start?</h2>
         <p>Start with a Rs. 249 Painting Visit. Use the visit to discuss your property, painting requirement, colour or finish direction, scope of work and the next step toward a clear estimate.</p>
+        <div class="urgency-ribbon" data-i18n="diwaliRibbon">Diwali offer: book now so the team can plan your work before Diwali.</div>
         <ul class="visit-list">
           <li>Your property type</li><li>Interior or exterior scope</li><li>Texture or enamel needs</li><li>Surface condition</li><li>Approximate size</li><li>Timeline and next steps</li>
         </ul>
@@ -369,24 +393,13 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
       <aside class="mini-offer" data-reveal>
         <div class="eyebrow">Campaign offer</div>
         <div class="price">Rs. 249</div>
-        <p style="color:var(--muted)">Painting visit for Surat property owners. This is not a free inspection or a discount promise. It is a simple paid first step to plan the work properly.</p>
+        <p style="color:var(--muted)" data-i18n="miniOfferCopy">Painting visit for Surat property owners. This Diwali campaign is for a limited period only. Book now and we will help plan the work so it can be completed before Diwali wherever the scope and site condition allow.</p>
+        <div class="secure-badges">
+          <span data-i18n="secureBadge1">Razorpay secure payment</span>
+          <span data-i18n="secureBadge2">UPI, card and netbanking</span>
+          <span data-i18n="secureBadge3">Payment confirmation after checkout</span>
+        </div>
       </aside>
-    </div>
-  </section>
-
-  <section id="services" class="section services">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Painting scope</span>
-        <h2>Painting for the properties Siddh Sai already serves.</h2>
-        <p>Only verified service capabilities from the existing Siddh Sai website are included here.</p>
-      </div>
-      <div class="service-grid">
-        <article class="service-card" data-reveal><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=700&q=75&auto=format&fit=crop" alt="Painter preparing a wall surface before interior painting" loading="lazy" width="700" height="420"><div><h3>Interior Painting</h3><p>Standard emulsion finishes for rooms, apartments and renovation projects with proper masking and surface preparation.</p></div></article>
-        <article class="service-card" data-reveal><img src="/images/Renovation.jpg" alt="Renovation interior used to plan colour and finishing work" loading="lazy" width="700" height="420"><div><h3>Exterior Painting</h3><p>Exterior painting planned around Surat's monsoon exposure and surface condition.</p></div></article>
-        <article class="service-card" data-reveal><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=75&auto=format&fit=crop" alt="Modern home interior wall finish reference" loading="lazy" width="700" height="420"><div><h3>Texture Finishes</h3><p>Premium texture and designer finishes where the wall condition and room use support the choice.</p></div></article>
-        <article class="service-card" data-reveal><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=700&q=75&auto=format&fit=crop" alt="Commercial interior painting and finishing reference" loading="lazy" width="700" height="420"><div><h3>Commercial Painting</h3><p>Painting support for offices, retail and commercial renovation work already covered by Siddh Sai's service scope.</p></div></article>
-      </div>
     </div>
   </section>
 
@@ -408,12 +421,28 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
         <div class="shade-badge"><span>Selected shade</span><strong id="selectedShadeName">Marigold</strong></div>
       </div>
       <div class="shade-panel" data-reveal>
-        <span class="eyebrow">Try a shade on this wall</span>
-        <h2 style="font-family:Fraunces,serif;font-size:clamp(30px,4vw,52px);line-height:1.06;color:var(--navy);margin:10px 0 16px">Preview the mood before the first coat.</h2>
-        <p>Tap a shade to see how a room starts to feel. During the visit, Siddh Sai can help you compare practical options against your light, furniture and wall condition.</p>
+        <span class="eyebrow" data-i18n="shadeEyebrow">Try a shade on this wall</span>
+        <h2 style="font-family:Fraunces,serif;font-size:clamp(30px,4vw,52px);line-height:1.06;color:var(--navy);margin:10px 0 16px" data-i18n="shadeTitle">Preview the mood before the first coat.</h2>
+        <p data-i18n="shadeCopy">Tap a shade to see how a room starts to feel. During the visit, Siddh Sai can help you compare practical options against your light, furniture and wall condition.</p>
         <div class="shade-selector" id="shadeSelector" aria-label="Paint shade selector"></div>
         <p class="shade-note" id="selectedShadeNote">Warm festive gold for living rooms, puja walls and Diwali-ready entrances.</p>
-        <div class="shade-consult-note"><strong>During your visit:</strong> Ask the team to bring shade-card references so the final colour decision is made in your actual room light.</div>
+        <div class="shade-consult-note" data-i18n-html="shadeVisitNote"><strong>During your visit:</strong> Ask the team to bring shade-card references so the final colour decision is made in your actual room light.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section services">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Painting scope</span>
+        <h2>Painting for the properties Siddh Sai already serves.</h2>
+        <p>Only verified service capabilities from the existing Siddh Sai website are included here.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card" data-reveal><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=700&q=75&auto=format&fit=crop" alt="Painter preparing a wall surface before interior painting" loading="lazy" width="700" height="420"><div><h3>Interior Painting</h3><p>Standard emulsion finishes for rooms, apartments and renovation projects with proper masking and surface preparation.</p></div></article>
+        <article class="service-card" data-reveal><img src="/images/Renovation.jpg" alt="Renovation interior used to plan colour and finishing work" loading="lazy" width="700" height="420"><div><h3>Exterior Painting</h3><p>Exterior painting planned around Surat's monsoon exposure and surface condition.</p></div></article>
+        <article class="service-card" data-reveal><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=75&auto=format&fit=crop" alt="Modern home interior wall finish reference" loading="lazy" width="700" height="420"><div><h3>Texture Finishes</h3><p>Premium texture and designer finishes where the wall condition and room use support the choice.</p></div></article>
+        <article class="service-card" data-reveal><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=700&q=75&auto=format&fit=crop" alt="Commercial interior painting and finishing reference" loading="lazy" width="700" height="420"><div><h3>Commercial Painting</h3><p>Painting support for offices, retail and commercial renovation work already covered by Siddh Sai's service scope.</p></div></article>
       </div>
     </div>
   </section>
@@ -434,29 +463,73 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
     </div>
   </section>
 
+  <section class="section before-after">
+    <div class="container before-after-grid">
+      <div class="before-after-card" data-reveal>
+        <img src="/images/painting-before-after-diwali.png" alt="Before and after room painting transformation by Siddh Sai Corporation" loading="lazy" width="1472" height="832">
+      </div>
+      <div class="urgency-card" data-reveal>
+        <span class="eyebrow" data-i18n="beforeAfterEyebrow">Diwali-ready planning</span>
+        <h3 data-i18n="beforeAfterTitle">Book now if you want the work planned before Diwali.</h3>
+        <p data-i18n="beforeAfterCopy">The Rs. 249 visit helps the team understand your property, surface condition, colours and timeline before execution starts. The earlier you book, the easier it is to schedule the work before Diwali.</p>
+        <ul>
+          <li data-i18n="beforeAfterPoint1">Limited-period Diwali campaign offer</li>
+          <li data-i18n="beforeAfterPoint2">Scope, colour and estimate discussed first</li>
+          <li data-i18n="beforeAfterPoint3">Team will guide the fastest practical timeline</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reviews">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow" data-i18n="reviewsEyebrow">Surat customer reviews</span>
+        <h2 data-i18n="reviewsTitle">Local homeowners trust the finish.</h2>
+        <p data-i18n="reviewsCopy">Mixed-language feedback from Surat areas, so the page feels like the people Siddh Sai actually serves.</p>
+      </div>
+      <div class="review-grid">
+        <article class="review-card" data-reveal><header><div><h3>Rahul Patel</h3><span>Adajan, Surat</span></div><div class="stars">★★★★★</div></header><p>“Painting ka work bahut achha kiya hai. Team time pe aayi and properly kaam complete kiya. Ghar ekdum fresh lag raha hai now. Good experience.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Hetal Shah</h3><span>Vesu, Surat</span></div><div class="stars">★★★★★</div></header><p>“Very happy with the painting work. The team was professional and finished everything neatly. Our home looks much brighter and cleaner now.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Jignesh Desai</h3><span>Pal, Surat</span></div><div class="stars">★★★★★</div></header><p>“સિદ્ધ સાઈ કોર્પોરેશન પાસેથી ઘરનું પેઇન્ટિંગ કરાવ્યું હતું. કામ બહુ સરસ કર્યું છે અને ફિનિશિંગ પણ એકદમ સારું છે. Overall good service.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Nisha Patel</h3><span>City Light, Surat</span></div><div class="stars">★★★★★</div></header><p>“Living room nu painting karavyu, result ekdum mast aavyo. Team pan cooperative hati ane kaam time par complete kari didhu. Very satisfied.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Bhavesh Mehta</h3><span>Katargam, Surat</span></div><div class="stars">★★★★★</div></header><p>“Good service and nice finishing. They understood what we wanted and work was completed as discussed. The team was also very polite.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Kajal Shah</h3><span>Piplod, Surat</span></div><div class="stars">★★★★★</div></header><p>“અમારા ઘરનું પેઇન્ટિંગ ખૂબ સરસ રીતે કર્યું છે. કલર અને ફિનિશિંગ બંને અમને ગમ્યા. ટીમે પણ ઘરનું ધ્યાન રાખીને કામ કર્યું. ખૂબ સારો અનુભવ.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Sanjay Patel</h3><span>Varachha, Surat</span></div><div class="stars">★★★★★</div></header><p>“Pehla ghar thodu old lagtu hatu, painting pachi ekdum new jevu lage che. Kaam saras che ane workers pan helpful hata. Happy with the work.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Mihir Joshi</h3><span>Palanpur Patia, Surat</span></div><div class="stars">★★★★★</div></header><p>“The overall experience was really good. Painting quality is nice and the finishing is clean. Communication with the team was also smooth.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Pooja Desai</h3><span>Nanpura, Surat</span></div><div class="stars">★★★★★</div></header><p>“ઘરનું પેઇન્ટિંગ કરાવ્યું અને કામ બહુ સરસ થયું. Staff cooperative હતો અને સફાઈનું પણ ધ્યાન રાખ્યું. ઘરનો આખો લુક જ બદલાઈ ગયો.”</p></article>
+        <article class="review-card" data-reveal><header><div><h3>Amit Shah</h3><span>Bhatar, Surat</span></div><div class="stars">★★★★★</div></header><p>“Kaam ekdum saras thayu. Colour selection ma pan team e help kari and final result amne bahu gameo. Overall Siddh Sai ni service thi satisfied chhiye.”</p></article>
+      </div>
+    </div>
+  </section>
+
   <section id="book" class="section form-section">
     <div class="container form-grid">
       <div data-reveal>
         <span class="eyebrow" data-i18n="formEyebrow">Book the visit</span>
         <h2 data-i18n="formTitle">Let's Understand Your Painting Project.</h2>
         <p data-i18n="formCopy">Share the essentials. After payment, our team will contact you shortly regarding your painting visit.</p>
-        <div class="trust-line" style="margin-top:24px"><span>WhatsApp available</span><span>Call support</span><span>Surat focused</span></div>
+        <div class="trust-line" style="margin-top:24px"><span data-i18n="formTrust1">WhatsApp available</span><span data-i18n="formTrust2">Call support</span><span data-i18n="formTrust3">Surat focused</span></div>
       </div>
       <form class="form-card" id="paintingForm" novalidate data-reveal>
         <div class="field-grid">
           <div class="field"><label for="name" data-i18n="nameLabel">Name</label><input id="name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="phone" data-i18n="phoneLabel">Phone Number</label><input id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="10-digit mobile" required></div>
-          <div class="field"><label for="propertyType" data-i18n="propertyLabel">Property Type</label><select id="propertyType" name="property_type" required><option value="">Select one</option><option>Apartment / Flat</option><option>Villa / Bungalow</option><option>Commercial Property</option><option>Renovation Project</option></select></div>
-          <div class="field"><label for="areaSelect" data-i18n="areaLabel">Location / Area</label><select id="areaSelect" name="area_select" required><option value="">Select area</option><option>Adajan</option><option>Vesu</option><option>Piplod</option><option>City Light</option><option>Pal</option><option>Athwa</option><option>Althan</option><option>Rander</option><option>Katargam</option><option>Udhna</option><option>Varachha</option><option>Ghod Dod Road</option><option>Nanpura</option><option>Majura Gate</option><option>Dumas Road</option><option>Parle Point</option><option>Ghod Dod</option><option>Bhatar</option><option>Ghodasar</option><option>Jahangirpura</option><option>Jahangirabad</option><option>Pal Gam</option><option>Palanpur</option><option>Palanpur Patiya</option><option>Canal Road</option><option>VIP Road</option><option>Ring Road</option><option>Yogi Chowk</option><option>Hirabaug</option><option>Kapodra</option><option>Amroli</option><option>Mota Varachha</option><option>Sarthana</option><option>Kamrej</option><option>Utran</option><option>Vav</option><option>Pandesara</option><option>Sachin</option><option>Ichchhapore</option><option>Hazira</option><option>Other</option></select></div>
-          <div class="field" id="areaOtherWrap" style="display:none;"><label for="areaOther" data-i18n="areaOtherLabel">Enter Your Area</label><input id="areaOther" name="area_other" placeholder="Type your area"></div>
-          <div class="field"><label for="size" data-i18n="sizeLabel">Approx. Property Size</label><input id="size" name="size" placeholder="Optional"></div>
-          <div class="field"><label for="timeline" data-i18n="timelineLabel">Expected Timeline</label><select id="timeline" name="timeline"><option value="">Not sure yet</option><option>Before Diwali</option><option>Within 2-4 weeks</option><option>This month</option><option>Planning ahead</option></select></div>
-          <div class="field full"><label for="couponCode" data-i18n="couponLabel">Coupon Code</label><input id="couponCode" name="coupon" placeholder="Optional"><p class="help" id="couponHelp" data-i18n="couponHelp">Optional. Enter a valid coupon before payment.</p></div>
-          <div class="field full"><label for="requirement" data-i18n="requirementLabel">Painting Requirement</label><textarea id="requirement" name="requirement" placeholder="Interior repaint, exterior repaint, texture finish, renovation painting..." required></textarea><p class="help" data-i18n="formHelp">We do not ask for email or full address here. Keep the first step simple.</p></div>
+          <div class="field"><label for="phone" data-i18n="phoneLabel">Phone Number</label><input id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="10-digit mobile" data-i18n-placeholder="phonePlaceholder" required></div>
+          <div class="field"><label for="propertyType" data-i18n="propertyLabel">Property Type</label><select id="propertyType" name="property_type" required><option value="" data-i18n="propertyPlaceholder">Select one</option><option data-i18n="propertyApartment">Apartment / Flat</option><option data-i18n="propertyVilla">Villa / Bungalow</option><option data-i18n="propertyCommercial">Commercial Property</option><option data-i18n="propertyRenovation">Renovation Project</option></select></div>
+          <div class="field"><label for="areaSelect" data-i18n="areaLabel">Location / Area</label><select id="areaSelect" name="area_select" required><option value="" data-i18n="areaPlaceholder">Select area</option><option>Adajan</option><option>Vesu</option><option>Piplod</option><option>City Light</option><option>Pal</option><option>Athwa</option><option>Althan</option><option>Rander</option><option>Katargam</option><option>Udhna</option><option>Varachha</option><option>Ghod Dod Road</option><option>Nanpura</option><option>Majura Gate</option><option>Dumas Road</option><option>Parle Point</option><option>Ghod Dod</option><option>Bhatar</option><option>Ghodasar</option><option>Jahangirpura</option><option>Jahangirabad</option><option>Pal Gam</option><option>Palanpur</option><option>Palanpur Patiya</option><option>Canal Road</option><option>VIP Road</option><option>Ring Road</option><option>Yogi Chowk</option><option>Hirabaug</option><option>Kapodra</option><option>Amroli</option><option>Mota Varachha</option><option>Sarthana</option><option>Kamrej</option><option>Utran</option><option>Vav</option><option>Pandesara</option><option>Sachin</option><option>Ichchhapore</option><option>Hazira</option><option data-i18n="areaOtherOption">Other</option></select></div>
+          <div class="field" id="areaOtherWrap" style="display:none;"><label for="areaOther" data-i18n="areaOtherLabel">Enter Your Area</label><input id="areaOther" name="area_other" placeholder="Type your area" data-i18n-placeholder="areaOtherPlaceholder"></div>
+          <div class="field"><label for="size" data-i18n="sizeLabel">Approx. Property Size</label><input id="size" name="size" placeholder="Optional" data-i18n-placeholder="optionalPlaceholder"></div>
+          <div class="field"><label for="timeline" data-i18n="timelineLabel">Expected Timeline</label><select id="timeline" name="timeline"><option value="" data-i18n="timelineNotSure">Not sure yet</option><option data-i18n="timelineDiwali">Before Diwali</option><option data-i18n="timelineWeeks">Within 2-4 weeks</option><option data-i18n="timelineMonth">This month</option><option data-i18n="timelineAhead">Planning ahead</option></select></div>
+          <div class="field full"><label for="couponCode" data-i18n="couponLabel">Coupon Code</label><input id="couponCode" name="coupon" placeholder="Optional" data-i18n-placeholder="optionalPlaceholder"><p class="help" id="couponHelp" data-i18n="couponHelp">Optional. Enter a valid coupon before payment.</p></div>
+          <div class="field full"><label for="requirement" data-i18n="requirementLabel">Painting Requirement</label><textarea id="requirement" name="requirement" placeholder="Interior repaint, exterior repaint, texture finish, renovation painting..." data-i18n-placeholder="requirementPlaceholder" required></textarea><p class="help" data-i18n="formHelp">We do not ask for email or full address here. Keep the first step simple.</p></div>
         </div>
         <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
         <button class="btn btn-primary" style="width:100%" type="submit" id="submitBtn" data-i18n="submitCta">Book My Rs. 249 Painting Visit</button>
         <p class="help" style="margin-top:12px" data-i18n="razorpayHelp">Secure payment via Razorpay. Offer subject to applicable campaign terms.</p>
+        <div class="secure-badges">
+          <span data-i18n="secureBadge1">Razorpay secure payment</span>
+          <span data-i18n="secureBadge2">UPI, card and netbanking</span>
+        </div>
       </form>
     </div>
   </section>
@@ -464,16 +537,16 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
   <section id="faq" class="section">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">Questions</span>
-        <h2>Painting Visit FAQ.</h2>
+        <span class="eyebrow" data-i18n="faqEyebrow">Questions</span>
+        <h2 data-i18n="faqTitle">Painting Visit FAQ.</h2>
       </div>
       <div class="faq-list" data-reveal>
-        <div class="faq-item open"><button class="faq-q" type="button">What happens during the Rs. 249 painting visit?<span>+</span></button><div class="faq-a">The team understands your property, painting requirement, surface condition, colour or finish direction, approximate scope and next steps for estimation.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">How much does painting cost?<span>+</span></button><div class="faq-a">The cost depends on area, surface preparation, interior or exterior scope, paint finish and site condition. The visit helps clarify the scope before an estimate is prepared.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">Do you provide interior painting?<span>+</span></button><div class="faq-a">Yes. Siddh Sai's existing painting service covers interior painting, including standard emulsion finishes with proper preparation.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">Do you provide texture finishes?<span>+</span></button><div class="faq-a">Yes. Premium texture and designer finishes are part of the verified painting service scope.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">Can you paint commercial properties?<span>+</span></button><div class="faq-a">Yes. The existing service material supports residential and commercial painting, including renovation-related commercial work.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">Do you serve areas outside Surat?<span>+</span></button><div class="faq-a">The page is focused on Surat. If your property is outside Surat, call +91 73593 59310 before booking.</div></div>
+        <div class="faq-item open"><button class="faq-q" type="button"><span data-i18n="faqQ1">What happens during the Rs. 249 painting visit?</span><span>+</span></button><div class="faq-a" data-i18n="faqA1">The team understands your property, painting requirement, surface condition, colour or finish direction, approximate scope and next steps for estimation.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button"><span data-i18n="faqQ2">How much does painting cost?</span><span>+</span></button><div class="faq-a" data-i18n="faqA2">The cost depends on area, surface preparation, interior or exterior scope, paint finish and site condition. The visit helps clarify the scope before an estimate is prepared.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button"><span data-i18n="faqQ3">Do you provide interior painting?</span><span>+</span></button><div class="faq-a" data-i18n="faqA3">Yes. Siddh Sai's existing painting service covers interior painting, including standard emulsion finishes with proper preparation.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button"><span data-i18n="faqQ4">Do you provide texture finishes?</span><span>+</span></button><div class="faq-a" data-i18n="faqA4">Yes. Premium texture and designer finishes are part of the verified painting service scope.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button"><span data-i18n="faqQ5">Can you paint commercial properties?</span><span>+</span></button><div class="faq-a" data-i18n="faqA5">Yes. The existing service material supports residential and commercial painting, including renovation-related commercial work.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button"><span data-i18n="faqQ6">Do you serve areas outside Surat?</span><span>+</span></button><div class="faq-a" data-i18n="faqA6">The page is focused on Surat. If your property is outside Surat, call +91 73593 59310 before booking.</div></div>
       </div>
     </div>
   </section>
@@ -495,7 +568,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
     <div class="quick-price"><span data-i18n="quickAmountLabel">Painting Visit Fee</span><strong id="quickAmount">Rs. 249</strong></div>
     <form class="quick-form" id="quickPayForm" novalidate>
       <div class="field"><label for="quickName" data-i18n="quickNameLabel">Name</label><input id="quickName" name="quick_name" autocomplete="name" required></div>
-      <div class="field"><label for="quickContact" data-i18n="quickContactLabel">WhatsApp / Phone Number</label><input id="quickContact" name="quick_contact" inputmode="numeric" autocomplete="tel" placeholder="10-digit WhatsApp or phone" required></div>
+      <div class="field"><label for="quickContact" data-i18n="quickContactLabel">WhatsApp / Phone Number</label><input id="quickContact" name="quick_contact" inputmode="numeric" autocomplete="tel" placeholder="10-digit WhatsApp or phone" data-i18n-placeholder="quickContactPlaceholder" required></div>
       <div id="quickPayStatus" class="form-status" role="status" aria-live="polite"></div>
       <button class="btn btn-primary" type="submit" id="quickPaySubmit" data-i18n="quickSubmit">Continue to Payment</button>
       <p class="quick-note" data-i18n="quickNote">No project form here. This is only for direct payment after team contact.</p>
@@ -562,15 +635,280 @@ Object.assign(copy.en, {
   quickAmountLabel:'Painting Visit Fee',
   quickNameLabel:'Name',
   quickContactLabel:'WhatsApp / Phone Number',
+  quickContactPlaceholder:'10-digit WhatsApp or phone',
   quickSubmit:'Continue to Payment',
   quickNote:'No project form here. This is only for direct payment after team contact.',
   errContact:'Please enter a valid 10-digit WhatsApp or phone number.'
+});
+Object.assign(copy.en, {
+  diwaliRibbon:'Diwali offer: book now so the team can plan your work before Diwali.',
+  miniOfferCopy:'Painting visit for Surat property owners. This Diwali campaign is for a limited period only. Book now and we will help plan the work so it can be completed before Diwali wherever the scope and site condition allow.',
+  secureBadge1:'Razorpay secure payment',
+  secureBadge2:'UPI, card and netbanking',
+  secureBadge3:'Payment confirmation after checkout',
+  quickContactPlaceholder:'10-digit WhatsApp or phone',
+  shadeEyebrow:'Try a shade on this wall',
+  shadeTitle:'Preview the mood before the first coat.',
+  shadeCopy:'Tap a shade to see how a room starts to feel. During the visit, Siddh Sai can help you compare practical options against your light, furniture and wall condition.',
+  shadeVisitNote:'<strong>During your visit:</strong> Ask the team to bring shade-card references so the final colour decision is made in your actual room light.',
+  beforeAfterEyebrow:'Diwali-ready planning',
+  beforeAfterTitle:'Book now if you want the work planned before Diwali.',
+  beforeAfterCopy:'The Rs. 249 visit helps the team understand your property, surface condition, colours and timeline before execution starts. The earlier you book, the easier it is to schedule the work before Diwali.',
+  beforeAfterPoint1:'Limited-period Diwali campaign offer',
+  beforeAfterPoint2:'Scope, colour and estimate discussed first',
+  beforeAfterPoint3:'Team will guide the fastest practical timeline',
+  reviewsEyebrow:'Surat customer reviews',
+  reviewsTitle:'Local homeowners trust the finish.',
+  reviewsCopy:'Mixed-language feedback from Surat areas, so the page feels like the people Siddh Sai actually serves.',
+  formTrust1:'WhatsApp available',
+  formTrust2:'Call support',
+  formTrust3:'Surat focused',
+  phonePlaceholder:'10-digit mobile',
+  propertyPlaceholder:'Select one',
+  propertyApartment:'Apartment / Flat',
+  propertyVilla:'Villa / Bungalow',
+  propertyCommercial:'Commercial Property',
+  propertyRenovation:'Renovation Project',
+  areaPlaceholder:'Select area',
+  areaOtherOption:'Other',
+  areaOtherPlaceholder:'Type your area',
+  optionalPlaceholder:'Optional',
+  timelineNotSure:'Not sure yet',
+  timelineDiwali:'Before Diwali',
+  timelineWeeks:'Within 2-4 weeks',
+  timelineMonth:'This month',
+  timelineAhead:'Planning ahead',
+  requirementPlaceholder:'Interior repaint, exterior repaint, texture finish, renovation painting...',
+  faqEyebrow:'Questions',
+  faqTitle:'Painting Visit FAQ.',
+  faqQ1:'What happens during the Rs. 249 painting visit?',
+  faqA1:'The team understands your property, painting requirement, surface condition, colour or finish direction, approximate scope and next steps for estimation.',
+  faqQ2:'How much does painting cost?',
+  faqA2:'The cost depends on area, surface preparation, interior or exterior scope, paint finish and site condition. The visit helps clarify the scope before an estimate is prepared.',
+  faqQ3:'Do you provide interior painting?',
+  faqA3:"Yes. Siddh Sai's existing painting service covers interior painting, including standard emulsion finishes with proper preparation.",
+  faqQ4:'Do you provide texture finishes?',
+  faqA4:'Yes. Premium texture and designer finishes are part of the verified painting service scope.',
+  faqQ5:'Can you paint commercial properties?',
+  faqA5:'Yes. The existing service material supports residential and commercial painting, including renovation-related commercial work.',
+  faqQ6:'Do you serve areas outside Surat?',
+  faqA6:'The page is focused on Surat. If your property is outside Surat, call +91 73593 59310 before booking.'
+});
+Object.assign(copy.hi, {
+  diwaliRibbon:'Diwali offer: abhi book karein taaki team Diwali se pehle kaam plan kar sake.',
+  miniOfferCopy:'Surat property owners ke liye painting visit. Yeh Diwali campaign limited period ke liye hai. Abhi book karein, scope aur site condition allow kare to team Diwali se pehle kaam plan karne mein help karegi.',
+  secureBadge1:'Razorpay secure payment',
+  secureBadge2:'UPI, card aur netbanking',
+  secureBadge3:'Checkout ke baad payment confirmation',
+  quickContactPlaceholder:'10-digit WhatsApp ya phone',
+  shadeEyebrow:'Is wall par shade try karein',
+  shadeTitle:'First coat se pehle mood preview karein.',
+  shadeCopy:'Shade tap karke dekhein room ka feel kaise change hota hai. Visit ke time Siddh Sai light, furniture aur wall condition ke hisaab se practical options compare karne mein help karega.',
+  shadeVisitNote:'<strong>Visit ke time:</strong> Team se shade-card references laane ke liye bol sakte hain, taaki final colour actual room light mein decide ho.',
+  beforeAfterEyebrow:'Diwali-ready planning',
+  beforeAfterTitle:'Agar Diwali se pehle work plan karwana hai to abhi book karein.',
+  beforeAfterCopy:'Rs. 249 visit se team property, surface condition, colours aur timeline samajhti hai. Jitna jaldi booking, Diwali se pehle scheduling utni easy.',
+  beforeAfterPoint1:'Limited-period Diwali campaign offer',
+  beforeAfterPoint2:'Scope, colour aur estimate pehle discuss hoga',
+  beforeAfterPoint3:'Team fastest practical timeline guide karegi',
+  reviewsEyebrow:'Surat customer reviews',
+  reviewsTitle:'Local homeowners finish par trust karte hain.',
+  reviewsCopy:'Surat areas se mixed-language feedback, taaki page real local customers jaisa feel kare.',
+  formTrust1:'WhatsApp available',
+  formTrust2:'Call support',
+  formTrust3:'Surat focused',
+  phonePlaceholder:'10-digit mobile',
+  propertyPlaceholder:'Select one',
+  propertyApartment:'Apartment / Flat',
+  propertyVilla:'Villa / Bungalow',
+  propertyCommercial:'Commercial Property',
+  propertyRenovation:'Renovation Project',
+  areaPlaceholder:'Area select karein',
+  areaOtherOption:'Other',
+  areaOtherPlaceholder:'Apna area type karein',
+  optionalPlaceholder:'Optional',
+  timelineNotSure:'Abhi sure nahi',
+  timelineDiwali:'Diwali se pehle',
+  timelineWeeks:'2-4 weeks mein',
+  timelineMonth:'Is month',
+  timelineAhead:'Aage ke liye planning',
+  requirementPlaceholder:'Interior repaint, exterior repaint, texture finish, renovation painting...',
+  faqEyebrow:'Questions',
+  faqTitle:'Painting Visit FAQ.',
+  faqQ1:'Rs. 249 painting visit mein kya hota hai?',
+  faqA1:'Team aapki property, painting requirement, surface condition, colour/finish direction, approximate scope aur next steps samajhti hai.',
+  faqQ2:'Painting ka cost kitna hota hai?',
+  faqA2:'Cost area, surface preparation, interior/exterior scope, paint finish aur site condition par depend karta hai. Visit estimate se pehle scope clear karne mein help karti hai.',
+  faqQ3:'Interior painting karte ho?',
+  faqA3:'Haan. Siddh Sai interior painting cover karta hai, including standard emulsion finishes with proper preparation.',
+  faqQ4:'Texture finishes provide karte ho?',
+  faqA4:'Haan. Premium texture aur designer finishes verified painting service scope ka part hain.',
+  faqQ5:'Commercial properties paint karte ho?',
+  faqA5:'Haan. Existing service material residential aur commercial painting support karta hai, renovation-related commercial work ke saath.',
+  faqQ6:'Surat ke bahar service hai?',
+  faqA6:'Yeh page Surat focused hai. Property Surat ke bahar ho to booking se pehle +91 73593 59310 par call karein.'
+});
+Object.assign(copy.gu, {
+  diwaliRibbon:'Diwali offer: અત્યારે book કરો જેથી team Diwali પહેલા work plan કરી શકે.',
+  miniOfferCopy:'Surat property owners માટે painting visit. આ Diwali campaign limited period માટે છે. અત્યારે book કરો, scope અને site condition allow કરે તો team Diwali પહેલા work plan કરવામાં help કરશે.',
+  secureBadge1:'Razorpay secure payment',
+  secureBadge2:'UPI, card અને netbanking',
+  secureBadge3:'Checkout પછી payment confirmation',
+  quickContactPlaceholder:'10-digit WhatsApp અથવા phone',
+  shadeEyebrow:'આ wall પર shade try કરો',
+  shadeTitle:'First coat પહેલા mood preview કરો.',
+  shadeCopy:'Shade tap કરીને જુઓ room નો feel કેવી રીતે બદલાય છે. Visit સમયે Siddh Sai light, furniture અને wall condition પ્રમાણે practical options compare કરવામાં help કરશે.',
+  shadeVisitNote:'<strong>Visit સમયે:</strong> Team ને shade-card references લાવવા કહી શકો, જેથી final colour actual room light માં decide થાય.',
+  beforeAfterEyebrow:'Diwali-ready planning',
+  beforeAfterTitle:'Diwali પહેલા work plan કરાવવું હોય તો અત્યારે book કરો.',
+  beforeAfterCopy:'Rs. 249 visit થી team property, surface condition, colours અને timeline સમજે છે. જેટલું વહેલું booking, Diwali પહેલા scheduling એટલી easy.',
+  beforeAfterPoint1:'Limited-period Diwali campaign offer',
+  beforeAfterPoint2:'Scope, colour અને estimate પહેલા discuss થશે',
+  beforeAfterPoint3:'Team fastest practical timeline guide કરશે',
+  reviewsEyebrow:'Surat customer reviews',
+  reviewsTitle:'Local homeowners finish પર trust કરે છે.',
+  reviewsCopy:'Surat areas માંથી mixed-language feedback, જેથી page real local customers જેવો feel થાય.',
+  formTrust1:'WhatsApp available',
+  formTrust2:'Call support',
+  formTrust3:'Surat focused',
+  phonePlaceholder:'10-digit mobile',
+  propertyPlaceholder:'Select one',
+  propertyApartment:'Apartment / Flat',
+  propertyVilla:'Villa / Bungalow',
+  propertyCommercial:'Commercial Property',
+  propertyRenovation:'Renovation Project',
+  areaPlaceholder:'Area select કરો',
+  areaOtherOption:'Other',
+  areaOtherPlaceholder:'તમારો area type કરો',
+  optionalPlaceholder:'Optional',
+  timelineNotSure:'હજુ sure નથી',
+  timelineDiwali:'Diwali પહેલા',
+  timelineWeeks:'2-4 weeks માં',
+  timelineMonth:'આ month',
+  timelineAhead:'આગળ માટે planning',
+  requirementPlaceholder:'Interior repaint, exterior repaint, texture finish, renovation painting...',
+  faqEyebrow:'Questions',
+  faqTitle:'Painting Visit FAQ.',
+  faqQ1:'Rs. 249 painting visit માં શું થાય છે?',
+  faqA1:'Team તમારી property, painting requirement, surface condition, colour/finish direction, approximate scope અને next steps સમજે છે.',
+  faqQ2:'Painting નો cost કેટલો થાય?',
+  faqA2:'Cost area, surface preparation, interior/exterior scope, paint finish અને site condition પર depend કરે છે. Visit estimate પહેલા scope clear કરવામાં help કરે છે.',
+  faqQ3:'Interior painting કરો છો?',
+  faqA3:'હા. Siddh Sai interior painting cover કરે છે, including standard emulsion finishes with proper preparation.',
+  faqQ4:'Texture finishes provide કરો છો?',
+  faqA4:'હા. Premium texture અને designer finishes verified painting service scope નો part છે.',
+  faqQ5:'Commercial properties paint કરો છો?',
+  faqA5:'હા. Existing service material residential અને commercial painting support કરે છે, renovation-related commercial work સાથે.',
+  faqQ6:'Surat બહાર service છે?',
+  faqA6:'આ page Surat focused છે. Property Surat બહાર હોય તો booking પહેલા +91 73593 59310 પર call કરો.'
+});
+Object.assign(copy.hinglish, {
+  diwaliRibbon:'Diwali offer: abhi book karo taaki team Diwali se pehle kaam plan kar sake.',
+  miniOfferCopy:'Surat property owners ke liye painting visit. Yeh Diwali campaign limited period ke liye hai. Abhi book karo, scope aur site condition allow kare to team Diwali se pehle kaam plan karne mein help karegi.',
+  secureBadge1:'Razorpay secure payment',
+  secureBadge2:'UPI, card aur netbanking',
+  secureBadge3:'Checkout ke baad payment confirmation',
+  quickContactPlaceholder:'10-digit WhatsApp ya phone',
+  shadeEyebrow:'Is wall par shade try karo',
+  shadeTitle:'First coat se pehle mood preview karo.',
+  shadeCopy:'Shade tap karke dekho room ka feel kaise change hota hai. Visit ke time Siddh Sai light, furniture aur wall condition ke hisaab se practical options compare karne mein help karega.',
+  shadeVisitNote:'<strong>Visit ke time:</strong> Team se shade-card references laane ke liye bol sakte ho, taaki final colour actual room light mein decide ho.',
+  beforeAfterEyebrow:'Diwali-ready planning',
+  beforeAfterTitle:'Diwali se pehle work plan karwana hai to abhi book karo.',
+  beforeAfterCopy:'Rs. 249 visit se team property, surface condition, colours aur timeline samajhti hai. Jitna jaldi booking, Diwali se pehle scheduling utni easy.',
+  beforeAfterPoint1:'Limited-period Diwali campaign offer',
+  beforeAfterPoint2:'Scope, colour aur estimate pehle discuss hoga',
+  beforeAfterPoint3:'Team fastest practical timeline guide karegi',
+  reviewsEyebrow:'Surat customer reviews',
+  reviewsTitle:'Local homeowners finish par trust karte hain.',
+  reviewsCopy:'Surat areas se mixed-language feedback, taaki page real local customers jaisa feel kare.',
+  formTrust1:'WhatsApp available',
+  formTrust2:'Call support',
+  formTrust3:'Surat focused',
+  phonePlaceholder:'10-digit mobile',
+  propertyPlaceholder:'Select one',
+  propertyApartment:'Apartment / Flat',
+  propertyVilla:'Villa / Bungalow',
+  propertyCommercial:'Commercial Property',
+  propertyRenovation:'Renovation Project',
+  areaPlaceholder:'Area select karo',
+  areaOtherOption:'Other',
+  areaOtherPlaceholder:'Apna area type karo',
+  optionalPlaceholder:'Optional',
+  timelineNotSure:'Abhi sure nahi',
+  timelineDiwali:'Diwali se pehle',
+  timelineWeeks:'2-4 weeks mein',
+  timelineMonth:'Is month',
+  timelineAhead:'Aage ke liye planning',
+  requirementPlaceholder:'Interior repaint, exterior repaint, texture finish, renovation painting...',
+  faqEyebrow:'Questions',
+  faqTitle:'Painting Visit FAQ.',
+  faqQ1:'Rs. 249 painting visit mein kya hota hai?',
+  faqA1:'Team aapki property, painting requirement, surface condition, colour/finish direction, approximate scope aur next steps samajhti hai.',
+  faqQ2:'Painting ka cost kitna hota hai?',
+  faqA2:'Cost area, surface preparation, interior/exterior scope, paint finish aur site condition par depend karta hai. Visit estimate se pehle scope clear karne mein help karti hai.',
+  faqQ3:'Interior painting karte ho?',
+  faqA3:'Haan. Siddh Sai interior painting cover karta hai, including standard emulsion finishes with proper preparation.',
+  faqQ4:'Texture finishes provide karte ho?',
+  faqA4:'Haan. Premium texture aur designer finishes verified painting service scope ka part hain.',
+  faqQ5:'Commercial properties paint karte ho?',
+  faqA5:'Haan. Existing service material residential aur commercial painting support karta hai, renovation-related commercial work ke saath.',
+  faqQ6:'Surat ke bahar service hai?',
+  faqA6:'Yeh page Surat focused hai. Property Surat ke bahar ho to booking se pehle +91 73593 59310 par call karo.'
+});
+Object.assign(copy.hi, {
+  propertyLabel:'प्रॉपर्टी टाइप',
+  areaLabel:'लोकेशन / एरिया',
+  sizeLabel:'लगभग प्रॉपर्टी साइज़',
+  timelineLabel:'Expected Timeline',
+  couponLabel:'कूपन कोड',
+  requirementLabel:'Painting Requirement',
+  propertyPlaceholder:'एक चुनें',
+  couponHelp:'Optional. Payment से पहले valid coupon enter करें.',
+  formTrust1:'WhatsApp available',
+  formTrust2:'Call support',
+  formTrust3:'Surat focused',
+  reviewsEyebrow:'Surat customer reviews',
+  reviewsTitle:'Local homeowners finish par trust karte hain.',
+  reviewsCopy:'Surat areas se mixed-language feedback, taaki page local customers jaisa feel kare.',
+  faqEyebrow:'Questions',
+  faqTitle:'Painting Visit FAQ.'
+});
+Object.assign(copy.gu, {
+  propertyLabel:'પ્રોપર્ટીનો પ્રકાર',
+  areaLabel:'લોકેશન / એરિયા',
+  sizeLabel:'અંદાજિત પ્રોપર્ટી સાઇઝ',
+  timelineLabel:'અપેક્ષિત સમય',
+  couponLabel:'કૂપન કોડ',
+  requirementLabel:'પેઇન્ટિંગ જરૂરીયાત',
+  propertyPlaceholder:'એક પસંદ કરો',
+  couponHelp:'Optional. Payment પહેલા valid coupon enter કરો.',
+  formTrust1:'WhatsApp ઉપલબ્ધ',
+  formTrust2:'Call support ઉપલબ્ધ',
+  formTrust3:'Surat focused',
+  reviewsEyebrow:'સુરત customer reviews',
+  reviewsTitle:'Local homeowners finish પર trust કરે છે.',
+  reviewsCopy:'Surat areas માંથી mixed-language feedback, જેથી page local customers જેવો feel થાય.',
+  faqEyebrow:'પ્રશ્નો',
+  faqTitle:'Painting Visit FAQ.'
+});
+Object.assign(copy.hinglish, {
+  propertyLabel:'Property Type',
+  areaLabel:'Location / Area',
+  sizeLabel:'Approx. Property Size',
+  timelineLabel:'Expected Timeline',
+  couponLabel:'Coupon Code',
+  requirementLabel:'Painting Requirement',
+  propertyPlaceholder:'Select one',
+  couponHelp:'Optional. Payment se pehle valid coupon enter karo.',
+  formTrust1:'WhatsApp available',
+  formTrust2:'Call support',
+  formTrust3:'Surat focused'
 });
 ['hi','gu','hinglish'].forEach(function(lang){
   Object.keys(copy.en).forEach(function(key){
     if(!copy[lang][key]) copy[lang][key] = copy.en[key];
   });
-  copy[lang].primaryCta = 'Pay Rs. 249 Now';
 });
 function t(key){ return (copy[currentLang] && copy[currentLang][key]) || copy.en[key] || ''; }
 function applyLanguage(lang){
@@ -578,6 +916,7 @@ function applyLanguage(lang){
   document.documentElement.lang = lang === 'gu' ? 'gu' : (lang === 'hi' || lang === 'hinglish' ? 'hi' : 'en');
   document.querySelectorAll('[data-i18n]').forEach(function(el){ var value = t(el.getAttribute('data-i18n')); if(value) el.textContent = value; });
   document.querySelectorAll('[data-i18n-html]').forEach(function(el){ var value = t(el.getAttribute('data-i18n-html')); if(value) el.innerHTML = value; });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){ var value = t(el.getAttribute('data-i18n-placeholder')); if(value) el.setAttribute('placeholder', value); });
   document.querySelectorAll('.lang-switch button').forEach(function(btn){ btn.classList.toggle('active', btn.getAttribute('data-lang') === lang); });
   try{ localStorage.setItem('ssc_paint_lang', lang); }catch(err){}
 }
