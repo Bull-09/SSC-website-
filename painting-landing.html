@@ -76,19 +76,23 @@ button,input,select,textarea{font:inherit}
 .lang-switch button{border:0;border-radius:var(--pill);padding:8px 11px;background:transparent;color:rgba(255,255,255,.75);font:800 12px Manrope,sans-serif;cursor:pointer}
 .lang-switch button.active{background:var(--gold);color:#241906}
 .mobile-menu{display:none;background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white);border-radius:12px;padding:10px 12px}
-.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 82% 16%,rgba(212,168,71,.22),transparent 34%),linear-gradient(135deg,var(--navy-deep),var(--navy-soft));color:var(--white)}
+.hero{--hero-shade:#d6a348;--hero-shade-soft:#e8c87a;position:relative;overflow:hidden;background:radial-gradient(circle at 82% 16%,rgba(212,168,71,.22),transparent 34%),linear-gradient(135deg,var(--navy-deep),var(--navy-soft));color:var(--white);transition:background .5s ease}
 .hero::before{content:"";position:absolute;inset:0;opacity:.08;background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:72px 72px}
+.hero::after{content:"";position:absolute;inset:-22% -12% auto auto;width:min(720px,70vw);height:min(720px,70vw);border-radius:50%;background:radial-gradient(circle,var(--hero-shade-soft),var(--hero-shade) 34%,transparent 68%);opacity:.28;filter:blur(8px);mix-blend-mode:screen;transition:background .55s ease,opacity .55s ease;pointer-events:none}
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;min-height:calc(100vh - 74px);padding:64px 0}
 .hero h1{font-family:Fraunces,serif;font-size:clamp(48px,7vw,86px);line-height:.95;letter-spacing:-.04em;margin:16px 0 18px}
-.hero h1 span{color:var(--gold)}
+.hero h1 span{color:var(--gold);background:linear-gradient(90deg,var(--gold),var(--hero-shade-soft),#fff2bd);-webkit-background-clip:text;background-clip:text;color:transparent;transition:background .55s ease}
 .hero-sub{font-size:20px;line-height:1.6;color:rgba(255,255,255,.84);max-width:650px}
 .hero-copy{font-size:16px;line-height:1.8;color:rgba(255,255,255,.68);max-width:620px;margin-top:18px}
 .hero-ctas{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
 .trust-line{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;color:rgba(255,255,255,.72);font-family:Manrope,sans-serif;font-size:13px;font-weight:700}
 .trust-line span{display:inline-flex;align-items:center;gap:8px}
 .trust-line span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.hero-shade-chip{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:10px 13px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.76);font:800 12px Manrope,sans-serif;backdrop-filter:blur(12px)}
+.hero-shade-chip strong{color:#fff}
+.hero-shade-dot{width:14px;height:14px;border-radius:50%;background:var(--hero-shade);box-shadow:0 0 0 5px rgba(255,255,255,.08),0 0 22px var(--hero-shade-soft);transition:background .55s ease,box-shadow .55s ease}
 .offer-card{background:rgba(255,255,255,.96);color:var(--navy);border-radius:30px;padding:24px;box-shadow:0 34px 90px rgba(0,0,0,.32);position:relative;overflow:hidden}
-.offer-card::before{content:"";position:absolute;inset:0 0 auto 0;height:8px;background:linear-gradient(90deg,var(--gold),#f1cf78)}
+.offer-card::before{content:"";position:absolute;inset:0 0 auto 0;height:8px;background:linear-gradient(90deg,var(--gold),var(--hero-shade-soft));transition:background .55s ease}
 .offer-image{height:320px;border-radius:22px;overflow:hidden;background:#d7c7ad;position:relative}
 .offer-image img{width:100%;height:100%;object-fit:cover}
 .offer-image::after{content:"Reference transformation visual";position:absolute;left:16px;bottom:16px;background:rgba(8,23,45,.78);color:#fff;border-radius:var(--pill);padding:8px 12px;font:700 11px Manrope,sans-serif;letter-spacing:.4px}
@@ -312,6 +316,11 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
           <span>33+ Years in Surat</span>
           <span>500+ Projects</span>
           <span>Engineer-Supervised Execution</span>
+        </div>
+        <div class="hero-shade-chip" aria-live="polite">
+          <span class="hero-shade-dot" aria-hidden="true"></span>
+          <span data-i18n="heroShadeLabel">Live shade mood:</span>
+          <strong id="heroShadeName">Marigold</strong>
         </div>
       </div>
       <aside class="offer-card" data-reveal>
@@ -694,7 +703,11 @@ Object.assign(copy.en, {
   faqQ6:'Do you serve areas outside Surat?',
   faqA6:'The page is focused on Surat. If your property is outside Surat, call +91 73593 59310 before booking.'
 });
+Object.assign(copy.en, {
+  heroShadeLabel:'Live shade mood:'
+});
 Object.assign(copy.hi, {
+  heroShadeLabel:'Live shade mood:',
   diwaliRibbon:'Diwali offer: abhi book karein taaki team Diwali se pehle kaam plan kar sake.',
   miniOfferCopy:'Surat property owners ke liye painting visit. Yeh Diwali campaign limited period ke liye hai. Abhi book karein, scope aur site condition allow kare to team Diwali se pehle kaam plan karne mein help karegi.',
   secureBadge1:'Razorpay secure payment',
@@ -749,6 +762,7 @@ Object.assign(copy.hi, {
   faqA6:'Yeh page Surat focused hai. Property Surat ke bahar ho to booking se pehle +91 73593 59310 par call karein.'
 });
 Object.assign(copy.gu, {
+  heroShadeLabel:'Live shade mood:',
   diwaliRibbon:'Diwali offer: અત્યારે book કરો જેથી team Diwali પહેલા work plan કરી શકે.',
   miniOfferCopy:'Surat property owners માટે painting visit. આ Diwali campaign limited period માટે છે. અત્યારે book કરો, scope અને site condition allow કરે તો team Diwali પહેલા work plan કરવામાં help કરશે.',
   secureBadge1:'Razorpay secure payment',
@@ -803,6 +817,7 @@ Object.assign(copy.gu, {
   faqA6:'આ page Surat focused છે. Property Surat બહાર હોય તો booking પહેલા +91 73593 59310 પર call કરો.'
 });
 Object.assign(copy.hinglish, {
+  heroShadeLabel:'Live shade mood:',
   diwaliRibbon:'Diwali offer: abhi book karo taaki team Diwali se pehle kaam plan kar sake.',
   miniOfferCopy:'Surat property owners ke liye painting visit. Yeh Diwali campaign limited period ke liye hai. Abhi book karo, scope aur site condition allow kare to team Diwali se pehle kaam plan karne mein help karegi.',
   secureBadge1:'Razorpay secure payment',
@@ -1298,6 +1313,28 @@ var paintShades = [
   {name:'Diya White', color:'#efe7da', soft:'#fbf7ef', note:'A soft warm white for a clean premium look when you want the room to feel bigger.'}
 ];
 
+function setHeroShade(index){
+  var hero = document.querySelector('.hero');
+  var shadeName = document.getElementById('heroShadeName');
+  if(!hero || !shadeName) return;
+  var shade = paintShades[index] || paintShades[0];
+  hero.style.setProperty('--hero-shade', shade.color);
+  hero.style.setProperty('--hero-shade-soft', shade.soft);
+  shadeName.textContent = shade.name;
+}
+
+function initHeroColorEffect(){
+  var hero = document.querySelector('.hero');
+  if(!hero) return;
+  var index = 0;
+  setHeroShade(index);
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  window.setInterval(function(){
+    index = (index + 1) % paintShades.length;
+    setHeroShade(index);
+  }, 2600);
+}
+
 function initShadeVisualizer(){
   var selector = document.getElementById('shadeSelector');
   var preview = document.getElementById('shadePreview');
@@ -1314,6 +1351,7 @@ function initShadeVisualizer(){
     selector.querySelectorAll('.shade-swatch').forEach(function(button, buttonIndex){
       button.setAttribute('aria-pressed', buttonIndex === index ? 'true' : 'false');
     });
+    setHeroShade(index);
     trackEvent('paint_shade_preview', {shade:shade.name});
   }
 
@@ -1350,6 +1388,7 @@ try{
   applyLanguage('en');
 }
 updateCouponUi();
+initHeroColorEffect();
 initShadeVisualizer();
 </script>
 </body>
