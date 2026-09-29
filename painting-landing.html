@@ -130,12 +130,33 @@ button,input,select,textarea{font:inherit}
 .service-card h3{font-family:Fraunces,serif;color:var(--navy);font-size:22px;margin-bottom:8px}
 .service-card p{font-size:14px;line-height:1.65;color:var(--muted)}
 .compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
-.comparison{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#d9cbb9}
-.comparison img{width:100%;height:440px;object-fit:cover}
-.comparison .divider{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--gold);box-shadow:0 0 0 999px rgba(8,23,45,.08)}
-.comparison-labels{position:absolute;inset:auto 16px 16px 16px;display:flex;justify-content:space-between}
-.comparison-labels span{background:rgba(8,23,45,.82);color:#fff;border-radius:var(--pill);padding:8px 12px;font:800 12px Manrope,sans-serif}
-.proof-note{background:var(--white);border:1px dashed rgba(15,34,64,.24);border-radius:20px;padding:22px;color:var(--muted);line-height:1.7}
+.shade-section{background:linear-gradient(180deg,var(--cream),#fff)}
+.shade-visualizer{--wall-color:#d6a348;--wall-soft:#e8c87a;position:relative;min-height:460px;border-radius:30px;overflow:hidden;background:#efe1cb;box-shadow:var(--shadow);border:1px solid rgba(15,34,64,.1)}
+.shade-room{position:absolute;inset:0;overflow:hidden}
+.shade-wall{position:absolute;inset:0 0 31%;background:linear-gradient(135deg,var(--wall-soft),var(--wall-color));transition:background .45s ease}
+.shade-wall::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 22% 18%,rgba(255,255,255,.34),transparent 30%),linear-gradient(90deg,rgba(255,255,255,.18),transparent 48%,rgba(0,0,0,.08));mix-blend-mode:soft-light}
+.wall-art{position:absolute;right:12%;top:15%;width:128px;height:94px;border:12px solid rgba(255,255,255,.78);border-radius:8px;background:linear-gradient(135deg,rgba(8,23,45,.2),rgba(255,255,255,.4));box-shadow:0 14px 30px rgba(8,23,45,.18)}
+.wall-shelf{position:absolute;left:10%;top:44%;width:170px;height:12px;border-radius:999px;background:#493726;box-shadow:0 14px 24px rgba(8,23,45,.18)}
+.wall-shelf::after{content:"";position:absolute;right:18px;bottom:12px;width:32px;height:46px;border-radius:16px 16px 6px 6px;background:#f7efe3}
+.shade-floor{position:absolute;left:-6%;right:-6%;bottom:-4%;height:36%;background:linear-gradient(180deg,#e1c9a7,#b89568);transform:skewY(-3deg);transform-origin:left top;box-shadow:0 -20px 60px rgba(8,23,45,.12)}
+.shade-sofa{position:absolute;left:10%;right:14%;bottom:16%;height:118px;border-radius:34px 34px 22px 22px;background:linear-gradient(180deg,#0f2240,#09172d);box-shadow:0 28px 45px rgba(8,23,45,.28)}
+.shade-sofa::before,.shade-sofa::after{content:"";position:absolute;bottom:-18px;width:28%;height:58px;border-radius:22px;background:#09172d}
+.shade-sofa::before{left:7%}.shade-sofa::after{right:7%}
+.shade-cushion{position:absolute;top:22px;width:30%;height:58px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.08)}
+.shade-cushion:first-child{left:18%}.shade-cushion:last-child{right:18%;background:rgba(212,168,71,.28)}
+.shade-table{position:absolute;right:11%;bottom:12%;width:86px;height:54px;border-radius:999px;background:#e8d2ae;box-shadow:0 18px 30px rgba(8,23,45,.2)}
+.shade-table::after{content:"";position:absolute;left:38px;top:38px;width:10px;height:58px;border-radius:999px;background:#6f4f2e}
+.shade-badge{position:absolute;left:20px;bottom:20px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border:1px solid rgba(15,34,64,.1);border-radius:999px;padding:10px 14px;color:var(--muted);font:800 12px Manrope,sans-serif;box-shadow:var(--shadow-soft)}
+.shade-badge strong{color:var(--navy);font-size:14px}
+.shade-panel p{font-size:17px;line-height:1.8;color:var(--muted);margin-bottom:18px}
+.shade-selector{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 14px}
+.shade-swatch{width:50px;height:50px;border-radius:50%;border:1px solid rgba(15,34,64,.14);background:var(--swatch);cursor:pointer;position:relative;box-shadow:0 10px 20px rgba(8,23,45,.14);transition:transform .25s ease,box-shadow .25s ease}
+.shade-swatch::after{content:"";position:absolute;inset:-6px;border:2px solid transparent;border-radius:50%;transition:border-color .25s ease,transform .25s ease}
+.shade-swatch:hover,.shade-swatch[aria-pressed="true"]{transform:translateY(-2px);box-shadow:0 16px 28px rgba(8,23,45,.18)}
+.shade-swatch[aria-pressed="true"]::after{border-color:var(--navy);transform:scale(1.02)}
+.shade-swatch:focus-visible{outline:3px solid var(--gold);outline-offset:6px}
+.shade-note{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:16px 18px;color:var(--navy)!important;font-weight:800}
+.shade-consult-note{background:var(--white);border:1px dashed rgba(15,34,64,.24);border-radius:20px;padding:22px;color:var(--muted);line-height:1.7}
 .process{background:var(--white)}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .step{background:var(--cream);border-radius:20px;padding:22px;border:1px solid var(--line)}
@@ -191,11 +212,15 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
   body.reveal-ready [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
   body.reveal-ready [data-reveal].visible{opacity:1;transform:none}
 }
+@media (prefers-reduced-motion:reduce){
+  .shade-wall,.shade-swatch,.shade-swatch::after{transition:none}
+}
 @media(max-width:980px){
   .nav-links{display:none}.mobile-menu{display:inline-flex}.hero-inner,.offer-grid,.compare-wrap,.form-grid{grid-template-columns:1fr}.hero-inner{min-height:auto;padding:54px 0}.offer-card{max-width:640px}.trust-grid{grid-template-columns:repeat(2,1fr)}.cards,.feature-grid,.service-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.sticky-bar{display:flex}.wa-float{bottom:86px}.lang-switch{display:none}
+  .shade-visualizer{min-height:390px}
 }
 @media(max-width:620px){
-  .container{width:min(100% - 28px,1160px)}.section{padding:62px 0}.hero h1{font-size:50px}.hero-sub{font-size:18px}.hero-ctas .btn,.nav-actions .btn-primary{width:100%}.nav-actions{display:none}.trust-grid,.cards,.feature-grid,.service-grid,.steps,.field-grid,.footer-grid{grid-template-columns:1fr}.offer-image{height:250px}.price-box{grid-template-columns:1fr}.visit-list{grid-template-columns:1fr}.comparison img{height:320px}.form-card{padding:22px}.site-header{position:relative}
+  .container{width:min(100% - 28px,1160px)}.section{padding:62px 0}.hero h1{font-size:50px}.hero-sub{font-size:18px}.hero-ctas .btn,.nav-actions .btn-primary{width:100%}.nav-actions{display:none}.trust-grid,.cards,.feature-grid,.service-grid,.steps,.field-grid,.footer-grid{grid-template-columns:1fr}.offer-image{height:250px}.price-box{grid-template-columns:1fr}.visit-list{grid-template-columns:1fr}.shade-visualizer{min-height:340px;border-radius:24px}.shade-sofa{left:7%;right:9%;height:96px}.wall-art{width:98px;height:74px;right:9%}.wall-shelf{width:130px}.shade-table{right:6%;width:70px}.shade-badge{left:14px;bottom:14px}.shade-swatch{width:46px;height:46px}.form-card{padding:22px}.site-header{position:relative}
 }
 </style>
 <script type="application/ld+json">
@@ -365,18 +390,30 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.72);padding:50px 0 90
     </div>
   </section>
 
-  <section class="section">
+  <section class="section shade-section">
     <div class="container compare-wrap">
-      <div class="comparison" data-reveal>
-        <img src="/images/Renovation.jpg" alt="Before and after framework for future Siddh Sai painting project photos" loading="lazy" width="900" height="640">
-        <div class="divider" aria-hidden="true"></div>
-        <div class="comparison-labels"><span>Before</span><span>After</span></div>
+      <div class="shade-visualizer" id="shadePreview" data-reveal aria-label="Interactive paint shade wall preview">
+        <div class="shade-room" aria-hidden="true">
+          <div class="shade-wall">
+            <div class="wall-art"></div>
+            <div class="wall-shelf"></div>
+          </div>
+          <div class="shade-floor"></div>
+          <div class="shade-sofa">
+            <span class="shade-cushion"></span>
+            <span class="shade-cushion"></span>
+          </div>
+          <div class="shade-table"></div>
+        </div>
+        <div class="shade-badge"><span>Selected shade</span><strong id="selectedShadeName">Marigold</strong></div>
       </div>
-      <div data-reveal>
-        <span class="eyebrow">Before / after framework</span>
-        <h2 style="font-family:Fraunces,serif;font-size:clamp(30px,4vw,52px);line-height:1.06;color:var(--navy);margin:10px 0 16px">See What a Fresh Coat Can Change.</h2>
-        <p style="font-size:17px;line-height:1.8;color:var(--muted);margin-bottom:18px">This module is ready for real project before/after photography. Until those assets are available, the page avoids presenting stock images as Siddh Sai project proof.</p>
-        <div class="proof-note"><strong>Content slot:</strong> Add actual property type, location, scope, before image and after image here when approved project photos are available.</div>
+      <div class="shade-panel" data-reveal>
+        <span class="eyebrow">Try a shade on this wall</span>
+        <h2 style="font-family:Fraunces,serif;font-size:clamp(30px,4vw,52px);line-height:1.06;color:var(--navy);margin:10px 0 16px">Preview the mood before the first coat.</h2>
+        <p>Tap a shade to see how a room starts to feel. During the visit, Siddh Sai can help you compare practical options against your light, furniture and wall condition.</p>
+        <div class="shade-selector" id="shadeSelector" aria-label="Paint shade selector"></div>
+        <p class="shade-note" id="selectedShadeNote">Warm festive gold for living rooms, puja walls and Diwali-ready entrances.</p>
+        <div class="shade-consult-note"><strong>During your visit:</strong> Ask the team to bring shade-card references so the final colour decision is made in your actual room light.</div>
       </div>
     </div>
   </section>
@@ -913,6 +950,48 @@ document.getElementById('paintingForm').addEventListener('submit', async functio
   }
 });
 
+var paintShades = [
+  {name:'Marigold', color:'#d6a348', soft:'#e8c87a', note:'Warm festive gold for living rooms, puja walls and Diwali-ready entrances.'},
+  {name:'Kumkum', color:'#9f4a45', soft:'#c97c73', note:'A rich muted red for an accent wall that feels traditional without becoming too loud.'},
+  {name:'Peacock', color:'#216a73', soft:'#73a9ad', note:'A cool jewel teal that works well behind sofas, TV walls and calm bedroom corners.'},
+  {name:'Haldi', color:'#c9a13a', soft:'#e3c766', note:'A happy earthy yellow for kitchens, foyers and sunlit rooms that need warmth.'},
+  {name:'Mehendi', color:'#667047', soft:'#a2a978', note:'A grounded green for balcony walls, bedrooms and spaces with wood or plants.'},
+  {name:'Diya White', color:'#efe7da', soft:'#fbf7ef', note:'A soft warm white for a clean premium look when you want the room to feel bigger.'}
+];
+
+function initShadeVisualizer(){
+  var selector = document.getElementById('shadeSelector');
+  var preview = document.getElementById('shadePreview');
+  var selectedName = document.getElementById('selectedShadeName');
+  var selectedNote = document.getElementById('selectedShadeNote');
+  if(!selector || !preview || !selectedName || !selectedNote) return;
+
+  function chooseShade(index){
+    var shade = paintShades[index] || paintShades[0];
+    preview.style.setProperty('--wall-color', shade.color);
+    preview.style.setProperty('--wall-soft', shade.soft);
+    selectedName.textContent = shade.name;
+    selectedNote.textContent = shade.note;
+    selector.querySelectorAll('.shade-swatch').forEach(function(button, buttonIndex){
+      button.setAttribute('aria-pressed', buttonIndex === index ? 'true' : 'false');
+    });
+    trackEvent('paint_shade_preview', {shade:shade.name});
+  }
+
+  paintShades.forEach(function(shade, index){
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'shade-swatch';
+    button.style.setProperty('--swatch', shade.color);
+    button.setAttribute('aria-label', 'Preview ' + shade.name + ' paint shade');
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', function(){ chooseShade(index); });
+    selector.appendChild(button);
+  });
+
+  chooseShade(0);
+}
+
 if('IntersectionObserver' in window){
   document.body.classList.add('reveal-ready');
   var observer = new IntersectionObserver(function(entries){
@@ -932,6 +1011,7 @@ try{
   applyLanguage('en');
 }
 updateCouponUi();
+initShadeVisualizer();
 </script>
 </body>
 </html>
