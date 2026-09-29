@@ -104,7 +104,7 @@ async function handlePurchase(req, rawBody, body, res) {
     ? `https://siddhsaicorporation.in/${sourcePage}.html`
     : 'https://siddhsaicorporation.in/waterproofing-landing-399.html';
   const contentId = sourcePage === 'painting-landing'
-    ? 'painting-visit-249'
+    ? 'painting-visit-299'
     : 'waterproofing-inspection-399';
 
   const userData = {
