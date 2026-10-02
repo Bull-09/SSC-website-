@@ -224,6 +224,9 @@ footer h5{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter
 .mobile-call-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;background:var(--terracotta);padding:14px 20px;text-align:center;box-shadow:0 -6px 24px rgba(0,0,0,.18);}
 .mobile-call-bar a{font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;color:var(--white);text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;}
 .mobile-call-bar svg{width:18px;height:18px;}
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:9999;width:56px;height:56px;background:#25D366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.45);text-decoration:none;transition:transform .2s,box-shadow .2s;}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(37,211,102,.55);}
+.wa-float svg{width:30px;height:30px;fill:#fff;}
 
 /* ============ RESPONSIVE ============ */
 @media(max-width:900px){
@@ -254,5 +257,6 @@ footer h5{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter
   .container{padding:0 18px;}
   .section{padding:60px 0;}
   body{padding-bottom:62px;}
+  .wa-float{bottom:82px;right:18px;}
 
 }
