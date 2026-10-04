@@ -1119,6 +1119,15 @@ function trackEvent(name, params){
   }
 }
 
+function trackGoogleAdsLeadConversion(){
+  if(typeof gtag !== 'function') return;
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18296459666/7DqMCLafkMocEJKjt5RE',
+    'value': 1.0,
+    'currency': 'INR'
+  });
+}
+
 function setStatus(type, message){
   var status = document.getElementById('formStatus');
   status.className = 'form-status ' + type;
@@ -1404,6 +1413,7 @@ document.getElementById('quickPayForm').addEventListener('submit', async functio
   btn.textContent = t('payCreating');
   setQuickStatus('success', t('payOpening'));
   trackEvent('quick_payment_submit', {event_id:eventId, value:details.amountInr, currency:'INR', coupon:details.coupon || undefined});
+  trackGoogleAdsLeadConversion();
   sendLeadMirror(details, eventId);
 
   try{
@@ -1435,6 +1445,7 @@ document.getElementById('paintingForm').addEventListener('submit', async functio
   setStatus('success', t('payOpening'));
   trackEvent('painting_visit_booking_attempt', {property_type:details.property_type, event_id:eventId});
   trackEvent('form_submit', {form_name:'painting_visit', event_id:eventId});
+  trackGoogleAdsLeadConversion();
   sendLeadMirror(details, eventId);
 
   try{
