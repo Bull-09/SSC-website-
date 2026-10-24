@@ -1,6 +1,13 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/expert-reconstruction-services-in-surat",
+      "destination": "/reconstruction-services",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
