@@ -70,6 +70,12 @@ header{position:sticky;top:0;z-index:999;background:var(--navy);box-shadow:0 2px
 nav{display:flex;gap:26px;align-items:center;}
 nav a{font-size:14px;font-weight:600;color:rgba(255,255,255,.82);text-decoration:none;transition:color .2s;}
 nav a:hover,nav a.active{color:var(--terracotta-light);}
+.service-menu{position:relative;font:600 14px 'Manrope',sans-serif;color:rgba(255,255,255,.82);}
+.service-menu summary{cursor:pointer;padding:16px 0;}
+.service-menu[open] summary{color:var(--terracotta-light);}
+.service-menu-links{position:absolute;top:100%;left:0;min-width:240px;background:var(--navy-deep);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px;box-shadow:var(--shadow-md);}
+.service-menu-links a{display:block;padding:12px;white-space:normal;line-height:1.5;}
+.service-menu-links a:hover{background:rgba(255,255,255,.08);border-radius:4px;}
 .header-right{display:flex;align-items:center;gap:14px;flex-shrink:0;}
 .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;padding:10px;width:44px;height:44px;background:none;border:none;flex-shrink:0;}
 .hamburger span{width:24px;height:2px;background:white;display:block;border-radius:2px;}

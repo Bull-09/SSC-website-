@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Siddh Sai Corporation | Construction, Painting and Waterproofing in Surat</title>
 <meta name="description" content="Contact Siddh Sai Corporation in Surat for painting, waterproofing, renovation, civil construction, flooring, false ceiling, plumbing, electrical and solar work. Call +91 73593 59310.">
-<link rel="canonical" href="https://siddhsaicorporation.in/contact.html">
+<link rel="canonical" href="https://siddhsaicorporation.in/contact">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -93,7 +93,7 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
-      <a href="services.html">Services</a>
+      <details class="service-menu"><summary>Services</summary><div class="service-menu-links"><a href="/industrial-renovation-surat">Industrial Renovation</a><a href="/renovation-services-surat">General Renovation</a><a href="/structural-rehabilitation-surat">Structural Rehabilitation</a><a href="/services">All Services</a></div></details>
       <a href="blog.html">Resources</a>
       <a href="contact.html" class="active">Contact</a>
     </nav>
@@ -110,7 +110,7 @@
   <div class="mobile-nav" id="mobileNav">
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
-    <a href="services.html">Services</a>
+    <a href="services.html">Services</a><a href="/industrial-renovation-surat">Industrial Renovation</a><a href="/renovation-services-surat">General Renovation</a><a href="/structural-rehabilitation-surat">Rehabilitation</a>
     <a href="blog.html">Resources</a>
     <a href="contact.html">Contact</a>
     <a href="tel:+917359359310" style="color:var(--terracotta-light);font-weight:700;">Call +91 73593 59310</a>
@@ -171,7 +171,7 @@
           <div>
             <label for="service">Service Needed</label>
             <select id="service" name="service" required>
-              <option value="">Select service</option>
+              <option value="">Select service</option><option>Industrial Renovation</option><option>General Renovation</option><option>Structural Rehabilitation</option>
               <option>Painting</option>
               <option>Waterproofing</option>
               <option>Home Renovation</option>
@@ -187,10 +187,13 @@
           </div>
           <div>
             <label for="area">Area in Surat</label>
-            <input id="area" name="area" type="text" placeholder="Example: Vesu, Adajan, Piplod">
+            <select id="area" name="area" required><option value="">Select area</option><option>Sachin GIDC</option><option>Pandesara</option><option>Udhna</option><option>Bhestan</option><option>Ichchhapore</option><option>Hazira</option><option>Kadodara</option><option>Palsana</option><option>Vesu</option><option>Adajan</option><option>Pal</option><option>Piplod</option><option>City Light</option><option>Other</option></select><div id="otherAreaWrap" hidden><label for="otherArea">Your area</label><input id="otherArea" name="other_area" type="text"></div>
           </div>
           <div>
-            <label for="message">Requirement</label>
+            <label for="propertyUse">Property type</label><select id="propertyUse" required><option value="">Select property type</option><option>Factory / industrial unit</option><option>Warehouse</option><option>Office / shop</option><option>Home / bungalow</option><option>Society / building</option><option>Other</option></select>
+<label for="siteSize">Approximate site area (optional)</label><input id="siteSize" placeholder="Example: 10,000 sq ft">
+<label for="shutdown">Access / shutdown availability (optional)</label><select id="shutdown"><option value="">Select availability</option><option>Operating site - phased work needed</option><option>Planned shutdown</option><option>Vacant property</option><option>To be discussed</option></select>
+<label for="message">Requirement</label>
             <textarea id="message" name="message" placeholder="Briefly describe the work"></textarea>
           </div>
           <button class="btn btn-call btn-full" type="submit">Send Enquiry on WhatsApp</button>
@@ -276,19 +279,30 @@ function toggleMobileNav(){
   var nav = document.getElementById('mobileNav');
   nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
 }
+document.getElementById('area').addEventListener('change', function(){
+  var other = this.value === 'Other';
+  document.getElementById('otherAreaWrap').hidden = !other;
+  document.getElementById('otherArea').required = other;
+});
+var selectedService = new URLSearchParams(location.search).get('service');
+if(selectedService && Array.from(document.getElementById('service').options).some(function(o){return o.value === selectedService;})){
+  document.getElementById('service').value = selectedService;
+}
 document.getElementById('contactForm').addEventListener('submit', function(event){
   event.preventDefault();
   var name = document.getElementById('name').value.trim();
   var phone = document.getElementById('phone').value.replace(/\D/g, '');
   var service = document.getElementById('service').value;
-  var area = document.getElementById('area').value.trim();
+  var areaChoice = document.getElementById('area').value;
+  var area = areaChoice === 'Other' ? document.getElementById('otherArea').value.trim() : areaChoice;
+  if(!area){ document.getElementById(areaChoice === 'Other' ? 'otherArea' : 'area').reportValidity(); return; }
   var message = document.getElementById('message').value.trim();
   if(!name || !/^[6-9][0-9]{9}$/.test(phone) || !service){
     alert('Please enter your name, valid 10-digit phone number and service.');
     return;
   }
-  var text = 'Hi, I want to discuss a project with Siddh Sai Corporation.%0A%0AName: ' + encodeURIComponent(name) + '%0APhone: ' + encodeURIComponent(phone) + '%0AService: ' + encodeURIComponent(service) + '%0AArea: ' + encodeURIComponent(area || 'Not shared') + '%0ARequirement: ' + encodeURIComponent(message || 'Not shared');
-  if(window.gtag){ gtag('event','contact_form_whatsapp',{event_category:'lead',event_label:service}); }
+  var text = 'Hi, I want to discuss a project with Siddh Sai Corporation.%0A%0AName: ' + encodeURIComponent(name) + '%0APhone: ' + encodeURIComponent(phone) + '%0AService: ' + encodeURIComponent(service) + '%0AArea: ' + encodeURIComponent(area || 'Not shared') + '%0AProperty type: ' + encodeURIComponent(document.getElementById('propertyUse').value) + '%0ASite area: ' + encodeURIComponent(document.getElementById('siteSize').value || 'To be discussed') + '%0AAccess: ' + encodeURIComponent(document.getElementById('shutdown').value || 'To be discussed') + '%0ARequirement: ' + encodeURIComponent(message || 'Not shared');
+  if(window.gtag){ gtag('event','whatsapp_enquiry_intent',{event_category:'lead',event_label:service}); }
   window.location.href = 'https://wa.me/919924442799?text=' + text;
 });
 </script>

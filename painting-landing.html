@@ -31,6 +31,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-J9WP053K1D');
+gtag('config', 'AW-18296459666');
 </script>
 <script>
 !function(f,b,e,v,n,t,s)
@@ -1327,6 +1328,7 @@ function openCheckout(details, order){
         discount: details.discountInr || 0
       });
       try{ sessionStorage.setItem('ssc_painting_booking', JSON.stringify(booking)); }catch(err){}
+      trackEvent('purchase', {transaction_id:response.razorpay_payment_id, value:details.amountInr, currency:'INR'});
       trackEvent('painting_visit_booking_success', {value:details.amountInr, currency:'INR', coupon:details.coupon || undefined});
       window.location.href = 'painting-visit-confirmed.html?payment_id=' + encodeURIComponent(response.razorpay_payment_id || '') + '&amount=' + encodeURIComponent(details.amountInr) + (details.coupon ? '&coupon=' + encodeURIComponent(details.coupon) : '');
     },
@@ -1413,7 +1415,6 @@ document.getElementById('quickPayForm').addEventListener('submit', async functio
   btn.textContent = t('payCreating');
   setQuickStatus('success', t('payOpening'));
   trackEvent('quick_payment_submit', {event_id:eventId, value:details.amountInr, currency:'INR', coupon:details.coupon || undefined});
-  trackGoogleAdsLeadConversion();
   sendLeadMirror(details, eventId);
 
   try{
@@ -1445,7 +1446,6 @@ document.getElementById('paintingForm').addEventListener('submit', async functio
   setStatus('success', t('payOpening'));
   trackEvent('painting_visit_booking_attempt', {property_type:details.property_type, event_id:eventId});
   trackEvent('form_submit', {form_name:'painting_visit', event_id:eventId});
-  trackGoogleAdsLeadConversion();
   sendLeadMirror(details, eventId);
 
   try{
@@ -1456,6 +1456,8 @@ document.getElementById('paintingForm').addEventListener('submit', async functio
     });
     var order = await response.json();
     if(!response.ok) throw new Error(order.error || 'Could not create payment order.');
+    trackGoogleAdsLeadConversion();
+    trackEvent('painting_booking_request_accepted', {event_id:eventId});
     openCheckout(details, order);
   }catch(err){
     btn.disabled = false;
