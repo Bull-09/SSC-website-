@@ -3,6 +3,21 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/flooring-services-in-surat",
+      "destination": "/flooring-services",
+      "permanent": true
+    },
+    {
+      "source": "/crack-filling-services-in-surat",
+      "destination": "/structural-crack-filling",
+      "permanent": true
+    },
+    {
+      "source": "/top-electrical-contractors-in-surat-ensuring-quality-and-safety",
+      "destination": "/electrical-services",
+      "permanent": true
+    },
+    {
       "source": "/expert-reconstruction-services-in-surat",
       "destination": "/reconstruction-services",
       "permanent": true
